@@ -1,5 +1,15 @@
 .p-homepage {
 
+    &__slider {
+        position: relative;
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 1920px;
+        margin: 0 auto;
+        height: 400px;
+        @include sm(height, 300px);
+    }
+
     &__content {
 
         @media (max-width: 1199px) {
@@ -20,10 +30,7 @@
         .cards {
             @include col();
             @include size(9);
-
-            @media (max-width:1199px) {
-                @include size(12);
-            }
+            @include size-lg(12);
 
             .card {
                 border: 2px solid $border-color;
@@ -36,24 +43,21 @@
 
                 &:not(:first-child) {
                     @include size(4);
+                    @include size-md(6);
+                    @include size-xs(12);
                     margin-top: 30px;
+                    @include xs(margin-top, 20px);
                 }
 
                 &:nth-child(6) {
                     transform: translateY(-35px);
-                    
-                    @media (max-width: 991px) {
-                        transform: translateY(0);
-
-                    }
+                    @include md(transform, translateY(0));
                 }
 
-                &:nth-child(2) {
-
-                    @media (max-width:991px) {
-                        display: none;
-                    }
+                &:nth-child(3) {
+                    @include md(display, none);
                 }
+
 
                 &__img {
                     img {
@@ -62,27 +66,15 @@
                 }
 
                 &__title {
-                    font-size: 20px;
                     text-align: center;
                     margin: 25px 0;
-
-                    @media (max-width:991px) {
-                        margin: 20px 0;
-                        font-size: 24px;
-
-                    }
-
-                    @media (max-width:767px) {}
-
+                    @include md(margin, 20px 0);
                 }
 
                 .card-row {
                     @include row-flex();
                     justify-content: center;
-
-                    @media (max-width:991px) {
-                        padding-top: 5px;
-                    }
+                    @include md(padding-top, 5px);
                 }
 
                 &__date {
@@ -115,10 +107,7 @@
                     font-size: 14px;
                     padding: 20px;
                     text-align: center;
-
-                    @media (max-width:767px) {
-                        padding: 20px 20px 35px;
-                    }
+                    @include sm(padding, 20px 20px 35px);
 
                 }
 
@@ -154,6 +143,7 @@
 
             .main-card {
                 height: auto;
+                @include size(12);
 
                 .card__title {
                     @include font-md();
@@ -169,19 +159,10 @@
                     width: 325px;
                     text-align: left;
                     margin: 20px auto 25px;
-
-
-                    @media (max-width:991px) {
-                        margin: 0 auto 25px;
-                        width: 380px;
-
-                    }
-
-                    @media (max-width:767px) {
-                        width: 100%;
-                        margin: 0;
-
-                    }
+                    @include md(margin, 0 auto 10px);
+                    @include md(width, 380px);
+                    @include xs(margin, 0);
+                    @include xs(width, auto);
                 }
             }
 
@@ -191,16 +172,8 @@
 
             .cards__btn {
                 @include button();
-                height: 55px;
                 margin-top: 50px;
-
-
-                @media (max-width:767px) {
-                    margin-top: 5px;
-                    height: 45px;
-                }
-
-
+                @include sm(margin-top, 25px);
             }
         }
 

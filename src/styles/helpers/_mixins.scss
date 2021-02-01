@@ -2,33 +2,25 @@
 @mixin font-lg() {
     font-size: 42px;
 
-    @media (max-width: 767px) {
-        font-size: 32px;
-    }
+    @include md(font-size, 32px);
 }
 
 @mixin font-md() {
     font-size: 26px;
 
-    @media (max-width: 767px) {
-        font-size: 20px;
-    }
+    @include md(font-size, 20px);
 }
 
 @mixin font-sm() {
     font-size: 16px;
 
-    @media (max-width: 767px) {
-        font-size: 12px;
-    }
+    @include md(font-size, 12px);
 }
 
 @mixin font-xs() {
     font-size: 12px;
 
-    @media (max-width: 767px) {
-        font-size: 10px;
-    }
+    @include md(font-size, 10px);
 }
 
 //font-famaly
@@ -46,7 +38,7 @@
     @include font-sm();
     cursor: pointer;
     width: max-content;
-    padding: 0 15px;
+    padding: 15px;
     margin: 0 auto;
     font-weight: bold;
     color: black;

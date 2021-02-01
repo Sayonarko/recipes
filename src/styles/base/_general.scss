@@ -11,10 +11,10 @@ h1, h2, h3, h4, h5, h6, ul {
 
 .container {
     @include container();
-    @include sm(max-width, rem(510));
-    @include md(max-width, rem(690));
-    @include lg(max-width, rem(930));
-    @include xl(max-width, rem(1110));
+    @include sm(max-width, 100%);
+    @include md(max-width, 750px);
+    @include lg(max-width, 950px);
+    @include xl(max-width, 1140px);
 }
 
 .container_full {

@@ -1,0 +1,50 @@
+.footer {
+    border-top: 1px solid $border-color;
+
+
+    .container_full {
+        @include xs(padding, 20px 15px);
+        padding: 30px 15px;
+
+        .row {
+            @include xs(flex-direction, column);
+            @include xs(justify-content, center);
+            justify-content: space-between;
+        }
+    }
+
+    .share {
+        @include col();
+        @include xs(justify-content, center);
+        display: flex;
+        align-items: center;
+
+        span {
+            @include font-md();
+            margin-right: 10px;
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+        }
+
+        img {
+            @include sm(width, 18px);
+            @include sm(height, 18px);
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+    .copy-r {
+        @include col();
+        @include xs(justify-content, center);
+        @include xs(margin-top, 15px);
+        display: flex;
+        align-items: center;
+        color: $border-color;
+    }
+}

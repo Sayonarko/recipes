@@ -1,76 +1,44 @@
 .sidebar {
-    height: fit-content;
     @include col();
     @include size(3);
-    background: $secondary-color;
-    padding: 30px;
+    
+    @include lg(display, none);
     position: sticky;
     top: 50px;
-
-
-    &__title {
-        font-size: 16px;
-        letter-spacing: 3px;
-        font-weight: bold;
-        text-transform: uppercase;
-        position: relative;
-
-        &::after {
-            content: '';
-            display: block;
-            width: 15px;
-            height: 3px;
-            background-color: $contrast-color;
-            position: absolute;
-            left: 0;
-            bottom: -10px;
-        }
-    }
+    height: fit-content;
+    padding: 30px;
+    background: $secondary-color;
 
     .categ {
         display: flex;
         flex-wrap: wrap;
         padding: 20px 0;
 
-        a {
-            text-decoration: none;
-            width: 50%;
-            display: block;
-            color: #000;
-            font-weight: 400;
-            @include ff-p();
-        }
-
         .val {
             width: 50%;
             text-align: right;
         }
-    }
 
-    input {
-        @include ff-p();
-        margin: 27px 0;
-        padding: 0 10px;
-        height: 40px;
-        max-width: 170px;
+        a {
+            @include ff-p();
+            display: block;
+            width: 50%;
+            text-decoration: none;
+            color: #000;
+            font-weight: 400;
+        }
     }
 
     .posts {
         margin: 20px 0;
 
         .post {
-            text-decoration: none;
-            padding: 8px 0;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
+            padding: 8px 0;
+            text-decoration: none;
             border-bottom: 2px solid $border-color;
-
-
-            img {
-                margin-right: 10px;
-                margin-bottom: 10px;
-            }
 
             .title {
                 @include ff-p();
@@ -84,34 +52,66 @@
                 letter-spacing: 2px;
                 font-weight: bold;
             }
+
+
+            img {
+                margin-right: 10px;
+                margin-bottom: 10px;
+            }
         }
-
-
     }
 
     .tags {
-        margin-top: 17px;
         display: flex;
         flex-wrap: wrap;
+        margin-top: 17px;
 
         a {
+            @include font-xs();
             display: block;
-            margin-bottom: 10px;
-            text-decoration: none;
             border: 1px solid $contrast-color;
             padding: 4px 10px;
-            border-radius: 3px;
-            text-transform: uppercase;
-            @include font-xs();
-            margin-right: 10px;
-            letter-spacing: 2px;
             transition: color 0.3s ease,
                 background-color 0.3s ease;
+            margin-bottom: 10px;
+            text-decoration: none;
+            border-radius: 3px;
+            text-transform: uppercase;
+            margin-right: 10px;
+            letter-spacing: 2px;
 
             &:hover {
                 color: #fff;
                 background: $contrast-color;
             }
         }
+    }
+
+
+    &__title {
+        position: relative;
+        font-size: 16px;
+        letter-spacing: 3px;
+        font-weight: bold;
+        text-transform: uppercase;
+
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 15px;
+            height: 3px;
+            background-color: $contrast-color;
+        }
+    }
+
+    input {
+        @include ff-p();
+        max-width: 170px;
+        height: 40px;
+        margin: 27px 0;
+        padding: 0 10px;
     }
 }

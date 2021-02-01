@@ -1,0 +1,61 @@
+.menu {
+    height: 100%;
+
+    &__row {
+        display: flex;
+        height: 100%;
+
+    }
+
+    &__item {
+        list-style: none;
+        display: flex;
+        padding: 0 10px;
+
+
+
+        &+.menu__item{
+            margin-left: 25px;
+        }
+
+
+        a {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: #666666;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: color 0.3s ease;
+
+            &:after {
+                position: absolute;
+                left: 50%;
+                bottom: 0;
+                background-color: $contrast-color;
+                display: block;
+                content: "";
+                height: 3px;
+                width: 0%;
+                transform: translateX(-50%);
+                transition: width 0.3s ease-in-out;
+            }
+
+            &:hover {
+                color: $contrast-color;
+            }
+        }
+    }
+
+    .active {
+        color: $contrast-color;
+
+        &::after {
+            width: 100%;
+        }
+
+    }
+
+}

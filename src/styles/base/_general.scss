@@ -1,3 +1,8 @@
+body {
+    @include ff-u();
+    font-weight: normal;
+    font-size: 16px;
+}
 h1, h2, h3, h4, h5, h6, ul {
     margin: 0;
     padding: 0;
@@ -9,4 +14,28 @@ h1, h2, h3, h4, h5, h6, ul {
     @include md(max-width, rem(690));
     @include lg(max-width, rem(930));
     @include xl(max-width, rem(1110));
+}
+
+.container_full {
+    @include container-full();
+}
+
+h1 {
+    @include font-lg();
+    font-weight: bold;
+}
+
+h2 {
+    @include font-md();
+    font-weight: bold;
+}
+
+h3 {
+    @include font-sm();
+    font-weight: bold;
+}
+
+p {
+    @include ff-p();
+    @include font-sm();
 }

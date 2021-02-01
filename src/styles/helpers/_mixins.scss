@@ -1,0 +1,41 @@
+//font-size
+@mixin font-lg() {
+    font-size: 42px;
+
+    @media (max-width: 767px) {
+        font-size: 32px;
+    }
+}
+
+@mixin font-md() {
+    font-size: 26px;
+
+    @media (max-width: 767px) {
+        font-size: 20px;
+    }
+}
+
+@mixin font-sm() {
+    font-size: 16px;
+
+    @media (max-width: 767px) {
+        font-size: 12px;
+    }
+}
+
+@mixin font-xs() {
+    font-size: 12px;
+
+    @media (max-width: 767px) {
+        font-size: 10px;
+    }
+}
+
+//font-famaly
+@mixin ff-p() {
+    font-family: "Poppins", sans-serif;
+}
+
+@mixin ff-u() {
+    font-family: "Ubuntu", sans-serif;
+}

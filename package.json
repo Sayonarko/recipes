@@ -8,7 +8,7 @@
     },
     "license": "MIT",
     "scripts": {
-        "dev": "gulp",
+        "start": "gulp",
         "build": "gulp prod --production",
         "build:views": "gulp views --production",
         "build:styles": "gulp styles --production",
@@ -28,6 +28,7 @@
     },
     "devDependencies": {
         "@babel/core": "^7.4.3",
+        "@babel/plugin-transform-react-jsx": "^7.12.12",
         "@babel/preset-env": "^7.4.3",
         "@babel/register": "^7.4.0",
         "babel-eslint": "^10.0.1",
@@ -62,6 +63,8 @@
         "imagemin-webp": "^6.0.0",
         "imagemin-zopfli": "^7.0.0",
         "lint-staged": "^10.0.3",
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1",
         "require-dir": "^1.2.0",
         "stylelint": "^13.6.1",
         "stylelint-order": "^4.1.0",
@@ -71,12 +74,8 @@
         "yargs": "^15.4.1"
     },
     "dependencies": {
+        "eslint": "^7.19.0",
         "smart-grid": "^2.1.2"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
     },
     "lint-staged": {
         "!(_*).scss": [

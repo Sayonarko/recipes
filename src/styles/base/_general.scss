@@ -2,6 +2,7 @@ body {
     @include ff-u();
     font-weight: normal;
     font-size: 16px;
+    box-sizing: border-box;
 }
 h1, h2, h3, h4, h5, h6, ul {
     margin: 0;
@@ -42,4 +43,9 @@ h3 {
 p {
     @include ff-p();
     @include font-sm();
+}
+
+a {
+    color: #000;
+    cursor: pointer;
 }

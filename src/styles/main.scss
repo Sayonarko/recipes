@@ -4,7 +4,11 @@
 @import "vendor/libs";
 @import "base/fonts";
 @import "base/general";
-@import "../blocks/modules";
+//components
 @import "../blocks/components/menu/menu";
+@import "../blocks/modules/header/header";
+@import "../blocks/modules/sidebar/sidebar";
+@import "../blocks/modules/footer/footer";
+//pages
 @import "./pages/homepage";
 

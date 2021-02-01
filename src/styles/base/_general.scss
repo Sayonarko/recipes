@@ -20,6 +20,10 @@ h1, h2, h3, h4, h5, h6, ul {
     @include container-full();
 }
 
+.row {
+    @include row-flex();
+}
+
 h1 {
     @include font-lg();
     font-weight: bold;

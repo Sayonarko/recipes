@@ -39,3 +39,31 @@
 @mixin ff-u() {
     font-family: "Ubuntu", sans-serif;
 }
+
+
+//btn
+@mixin button() {
+    @include font-sm();
+    cursor: pointer;
+    width: max-content;
+    padding: 0 15px;
+    margin: 0 auto;
+    font-weight: bold;
+    color: black;
+    letter-spacing: 3px;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    transition: color 0.3s ease,
+        border 0.3s ease;
+
+    &:hover,
+    &:active {
+        color: $active-color;
+        border: 2px solid $active-color;
+    }
+
+}

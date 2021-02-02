@@ -1,7 +1,8 @@
 @import "helpers/variables";
+@import "base/grid";
 @import "helpers/mixins";
 @import "helpers/functions";
-@import "vendor/libs";
+@import "base/normalize";
 @import "base/fonts";
 @import "base/general";
 //components

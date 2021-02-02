@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import { SwitchTransition, CSSTransition } from "react-transition-group";
 
 function Slider() {
-    const slides = [
+    const [slides, setSlides] = useState([
         {
             id: 0,
             img: "../../../img/homepage/slider/slide-1.png",
@@ -35,28 +36,70 @@ function Slider() {
             desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt utlabore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...",
             link: "#"
         }
-    ];
+    ]);
 
+    function nextSlide() {
+        let newSlides = [...slides];
+        newSlides.slice();
+        newSlides.push(newSlides.shift());
+        setSlides(newSlides);
+    }
+
+    function prevSlide() {
+        let newSlides = [...slides];
+        newSlides.slice();
+        newSlides.unshift(newSlides.pop());
+        setSlides(newSlides);
+    }
+    console.log(slides);
     return (
         <>
+            <button className="slider__prev"
+                onClick={prevSlide}>
+                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                    <title />
+                    <g>
+                        <path
+                            d="M353,450a15,15,0,0,1-10.61-4.39L157.5,260.71a15,15,0,0,1,0-21.21L342.39,54.6a15,15,0,1,1,21.22,21.21L189.32,250.1,363.61,424.39A15,15,0,0,1,353,450Z" />
+                    </g>
+                </svg>
+            </button>
             <div className="slider">
-                <button className="slider__prev">prev</button>
 
                 {slides.map(({ id, img, title, date, desc, link }) => {
                     return (
-                        <div key={id}
-                            className="slide"
-                            style={{ backgroundImage: `url(${img})` }}>
-                            <h1 className="slide__title">{title}</h1>
-                            <span className="slide__date">{date}</span>
-                            <p className="slide__desc">{desc}</p>
-                            <a className="slide__btn"
-                                href={link}>read more</a>
-                        </div>
+                        <SwitchTransition
+                            mode="out-in">
+                            <CSSTransition
+                                key={id}
+                                classNames='fade'
+                                timeout={200}>
+                                <div
+                                    className="slide"
+                                    style={{ backgroundImage: `url(${img})` }}>
+                                    <h1 className="slide__title">{title}</h1>
+                                    <span className="slide__date">{date}</span>
+                                    <p className="slide__desc">{desc}</p>
+                                    <a className="slide__btn"
+                                        href={link}>read more</a>
+                                </div>
+                            </CSSTransition>
+                        </SwitchTransition>
+
                     );
                 })};
-                <button className="slider__next">next</button>
             </div>
+            <button className="slider__next"
+                onClick={nextSlide}>
+                <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                    <title />
+                    <g>
+                        <path
+                            d="M353,450a15,15,0,0,1-10.61-4.39L157.5,260.71a15,15,0,0,1,0-21.21L342.39,54.6a15,15,0,1,1,21.22,21.21L189.32,250.1,363.61,424.39A15,15,0,0,1,353,450Z" />
+                    </g>
+                </svg>
+            </button>
+
         </>
     );
 }

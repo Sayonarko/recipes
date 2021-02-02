@@ -2,7 +2,6 @@
 
     &__slider {
         position: relative;
-        overflow-x: hidden;
         width: 100%;
         max-width: 1920px;
         margin: 0 auto;
@@ -12,19 +11,10 @@
 
     &__content {
 
-        @media (max-width: 1199px) {
-            overflow: hidden;
-            position: relative;
-        }
-
         .container {
             padding-top: 50px;
             padding-bottom: 50px;
-
-            @media (max-width: 991px) {
-                overflow: hidden;
-                padding: 25px 15px;
-            }
+            @include md(padding, 25px 15px);
         }
 
         .cards {

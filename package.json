@@ -75,6 +75,7 @@
     },
     "dependencies": {
         "eslint": "^7.19.0",
+        "react-transition-group": "^4.4.1",
         "smart-grid": "^2.1.2"
     },
     "lint-staged": {

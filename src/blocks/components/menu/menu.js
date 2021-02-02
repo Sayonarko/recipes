@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
 function Menu() {
-    const localBtn = localStorage.getItem("btn");
+    const localBtn = sessionStorage.getItem("btn");
     const [btn, setBtn] = useState(localBtn ? JSON.parse(localBtn) :
         [
             {
@@ -50,7 +50,7 @@ function Menu() {
             (item.id === x) ? item.active = true : item.active = false;
         });
         setBtn(newBtn);
-        localStorage.setItem("btn", JSON.stringify(btn));
+        sessionStorage.setItem("btn", JSON.stringify(btn));
     }
 
     return (

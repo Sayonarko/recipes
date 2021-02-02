@@ -153,6 +153,7 @@
                     @include md(width, 380px);
                     @include xs(margin, 0);
                     @include xs(width, auto);
+                    @include xs(text-align, center);
                 }
             }
 

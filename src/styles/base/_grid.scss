@@ -26,6 +26,8 @@ $fields: 15px;
 @mixin container-full(){
     padding-left: $fields;
     padding-right: $fields;
+    max-width: 1920px;
+    margin: 0 auto;
 }
 
 @mixin row-offsets(){
@@ -39,9 +41,9 @@ $fields: 15px;
 }
 
 @mixin container(){
+    @include container-full();
     max-width: 1170px;
     margin: 0 auto;
-    @include container-full();
 }
 
 @mixin row-flex(){

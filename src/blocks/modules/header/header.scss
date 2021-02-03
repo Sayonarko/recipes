@@ -2,6 +2,7 @@
     @include sm(height, 70px);
     height: 90px;
 
+
     .container_full {
         display: flex;
         align-items: center;
@@ -9,7 +10,9 @@
         height: 100%;
 
         .logo {
-            @include xs(width, 110px);
+            @include sm(width, 120px);
+            display: flex;
+            align-items: center;justify-content: center;
 
             img {
                 max-width: 100%;

@@ -5,13 +5,14 @@
 @import "base/normalize";
 @import "base/fonts";
 @import "base/general";
-//components
-@import "../blocks/components/menu/menu";
+//modules
 @import "../blocks/modules/header/header";
 @import "../blocks/modules/sidebar/sidebar";
 @import "../blocks/modules/footer/footer";
 @import "../blocks/modules/slider/slider";
-
+//components
+@import "../blocks/components/menu/menu";
+@import "../blocks/components/burger-menu/burger-menu";
 //pages
 @import "./pages/homepage";
 

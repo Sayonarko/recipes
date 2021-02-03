@@ -36,7 +36,9 @@
             margin-top: auto;
         }
 
-
+        .active {
+            color: $contrast-color;
+        }
     }
 
     .menu__btn {

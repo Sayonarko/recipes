@@ -39,38 +39,25 @@ function Slider() {
     ]);
     const [slideIndex, setSlideIndex] = useState(1);
 
-    function sliderSwap(num) {
-        if (slideIndex < slides.length && slideIndex > 0) {
-            setSlideIndex(slideIndex + num);
-        } else if (slideIndex >= slides.length) {
-            setSlideIndex(1);
-        } else if (slideIndex == 0) {
-            setSlideIndex(slides.length - 1);
-        }
-    }
-
     useEffect(() => {
         let newSlides = [...slides];
         newSlides.map(item => {
             item.view = false;
         });
-        
-        if (slideIndex === 0) {
-            newSlides[slides.length - 1].view = true;
-        } else {
-            newSlides[slideIndex - 1].view = true;
-        }
+        (slideIndex === 0) ? setSlideIndex(slides.length)
+            : (slideIndex > slides.length) ? setSlideIndex(1)
+                : newSlides[slideIndex - 1].view = true;
         setSlides(newSlides);
     }, [slideIndex]);
 
     useEffect(() => {
-        const autoSlide = setInterval(() => sliderSwap(1), 4000);
+        const autoSlide = setInterval(() => setSlideIndex(slideIndex + 1), 4000);
         return () => clearInterval(autoSlide);
-    },[slideIndex]);
+    }, [slideIndex]);
 
     return (
         <>
-            <button className="slider__prev" onClick={() => sliderSwap(-1)}
+            <button className="slider__prev" onClick={() => setSlideIndex(slideIndex - 1)}
             >
                 <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
                     <title />
@@ -96,7 +83,7 @@ function Slider() {
                     );
                 })}
             </div>
-            <button className="slider__next" onClick={() => sliderSwap(1)}
+            <button className="slider__next" onClick={() => setSlideIndex(slideIndex + 1)}
             >
                 <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
                     <title />

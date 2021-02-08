@@ -51,7 +51,7 @@ function Slider() {
     }, [slideIndex]);
 
     useEffect(() => {
-        const autoSlide = setInterval(() => setSlideIndex(slideIndex + 1), 4000);
+        const autoSlide = setInterval(() => setSlideIndex(slideIndex + 1), 6000);
         return () => clearInterval(autoSlide);
     }, [slideIndex]);
 
@@ -72,8 +72,8 @@ function Slider() {
                     return (
                         <div
                             key={id}
-                            className="slide"
-                            style={{ backgroundImage: `url(${img})`, display: view ? "flex" : "none" }}>
+                            className={view ? "slide" : "hidden"}
+                            style={{ backgroundImage: `url(${img})`}}>
                             <h1 className="slide__title">{title}</h1>
                             <span className="slide__date">{date}</span>
                             <p className="slide__desc">{desc}</p>

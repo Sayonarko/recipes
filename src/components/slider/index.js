@@ -38,10 +38,10 @@ export default function Slider(props) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [slideIndex])
 
-    // useEffect(() => {
-    //     const autoSlide = setInterval(() => setSlideIndex(slideIndex + 1), 6000);
-    //     return () => clearInterval(autoSlide);
-    // }, [slideIndex]);
+    useEffect(() => {
+        const autoSlide = setInterval(() => setSlideIndex(slideIndex + 1), 6000);
+        return () => clearInterval(autoSlide);
+    }, [slideIndex]);
 
     function RenderSlider() {
 

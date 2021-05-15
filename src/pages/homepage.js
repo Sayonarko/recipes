@@ -11,20 +11,20 @@ import { API, API_ROUTER } from "../api/api"
 export default function Homepage() {
     const [cards, setCards] = useState([])
     const [requestSucess, setRequestSucess] = useState(false)
-    const [moreCards, setMoreCards] = useState(4)
-
-    function sortCards(arr) {
-        return arr.sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
-    }
+    const [moreCards, setMoreCards] = useState(10)
 
     useEffect(() => {
-        API(API_ROUTER.getPosts)
+        const params = {
+            limit: moreCards,
+            sort: "date"
+        }
+        API({...API_ROUTER.getPosts, params})
             .then(res => {
                 setCards(res.data)
                 setRequestSucess(true)
             })
             .catch(err => console.log(err))
-    }, [])
+    }, [moreCards])
 
     function RenderHomepage() {
 
@@ -35,7 +35,7 @@ export default function Homepage() {
                 <Grid item xs={12} md={8} lg={9}>
                     <Grid container spacing={6}>
                         {
-                            sortCards(cards).map((item, id) => id < moreCards && <RecipesCard {...item} id={id} key={item.title} />)
+                            cards.map((item, id) => id < moreCards && <RecipesCard {...item} id={id} key={item.title} />)
                         }
                     </Grid>
                     <Box
@@ -44,7 +44,7 @@ export default function Homepage() {
                         style={{ display: cards.length <= moreCards ? "none" : "block" }}>
                         <Button
                             size="large"
-                            onClick={() => setMoreCards(prev => prev + 4)} >
+                            onClick={() => setMoreCards(prev => prev + 10)} >
                             показать больше
                         </Button>
                     </Box>

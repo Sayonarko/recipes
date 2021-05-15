@@ -1,5 +1,5 @@
 import { Box, Typography, Grid, Button } from "@material-ui/core"
-import React, {useState, useEffect} from "react"
+import React, { useState, useEffect } from "react"
 import Container from "../components/UI/container"
 import RecipesCard from "../components/card"
 import Sidebar from "../components/sidebar"
@@ -9,20 +9,22 @@ import { API, API_ROUTER } from "../api/api"
 export default function TopPage() {
     const [cards, setCards] = useState([])
     const [requestSucess, setRequestSucess] = useState(false)
-    const [moreCards, setMoreCards] = useState(4)
+    const [moreCards, setMoreCards] = useState(10)
 
-    function sortCards(arr) {
-        return arr.sort((a, b) => b.views - a.views)
-    }
 
     useEffect(() => {
-        API(API_ROUTER.getPosts)
+
+        const params = {
+            limit: moreCards,
+            sort: "views"
+        }
+        API({ ...API_ROUTER.getPosts, params })
             .then(res => {
                 setCards(res.data)
                 setRequestSucess(true)
             })
             .catch(err => console.log(err))
-    }, [])
+    }, [moreCards])
 
     function RenderHomepage() {
 
@@ -33,7 +35,7 @@ export default function TopPage() {
                 <Grid item xs={12} md={8} lg={9}>
                     <Grid container spacing={6}>
                         {
-                            sortCards(cards).map((item, id) => id < moreCards && <RecipesCard {...item} id={id} key={item._id} />)
+                            cards.map((item, id) => id < moreCards && <RecipesCard {...item} id={id} key={item._id} />)
                         }
                     </Grid>
                     <Box
@@ -42,7 +44,7 @@ export default function TopPage() {
                         style={{ display: cards.length <= moreCards ? "none" : "block" }}>
                         <Button
                             size="large"
-                            onClick={() => setMoreCards(prev => prev + 4)} >
+                            onClick={() => setMoreCards(prev => prev + 10)} >
                             показать больше
                         </Button>
                     </Box>
@@ -62,7 +64,7 @@ export default function TopPage() {
                 minHeight="400px"
                 pt={{ xs: 5, sm: 10 }}
                 pb={{ xs: 5, sm: 10 }}>
-                    <Typography variant="h1" align="left" gutterBottom>Популярное на Recipes</Typography>
+                <Typography variant="h1" align="left" gutterBottom>Популярное на Recipes</Typography>
                 {requestSucess ? <RenderHomepage /> : <CircularProgress />}
             </Container>
         </Box>

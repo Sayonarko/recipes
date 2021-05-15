@@ -8,7 +8,7 @@ import smallBanner from "../../img/small-banner.png"
 import { Link } from "react-router-dom"
 import { API, API_ROUTER } from "../../api/api"
 
-export default function Sidebar(props) {
+export default function Sidebar() {
     const classes = useStyles()
     const [cards, setCards] = useState([])
     const [requestSucess, setRequestSucess] = useState(false)
@@ -23,26 +23,18 @@ export default function Sidebar(props) {
         return `${yyyy}-${mm}`
     }
 
-
-
-    function sortCards(arr) {
-        return arr.sort((a, b) => b.likes - a.likes).slice(0, 3)
-    }
-
     useEffect(() => {
-        if (props.data && props.data.length) {
-            setCards(sortCards(props.data))
-            setRequestSucess(true)
-        } else {
-            API(API_ROUTER.getPosts)
+       const params = {
+            limit: 3,
+            sort: "likes"
+        }
+            API({...API_ROUTER.getPosts, params})
             .then(res => {
                 setCards(res.data)
                 setRequestSucess(true)
             })
             .catch(err => console.log(err))
-        }
-
-    }, [props.data]);
+    }, []);
 
     function CollapseTags(props) {
         const [expanded, setExpanded] = useState(false)

@@ -12,7 +12,9 @@ body {
 
 }
 
-#root {
-  position: relative;
-  overflow-x: hidden;
+@media (max-width: 991px) {
+  #root {
+    position: relative;
+    overflow-x: hidden;
+  }
 }

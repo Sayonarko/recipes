@@ -1,0 +1,130 @@
+import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { Typography, CardContent, CardMedia, Card, Grid, Box, Fade } from '@material-ui/core';
+import formateDate from "../helpers/formate-date";
+import StopSharpIcon from '@material-ui/icons/StopSharp';
+import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
+import { Link } from "react-router-dom";
+
+export default function RecipesCard({ views, title, date, img, desc, link, tags, _id, id }) {
+    const classes = useStyles();
+    const [isRaised, setIsRaised] = useState(false)
+    const [windowWidth, setWindowWith] = useState(0)
+    const [fullWidth, setFullWidth] = useState(4)
+
+    useLayoutEffect(() => {
+        function updateSize() {
+            setWindowWith([window.innerWidth]);
+        }
+        window.addEventListener('resize', updateSize);
+        updateSize();
+        return () => window.removeEventListener('resize', updateSize);
+    }, []);
+
+    useEffect(() => {
+        windowWidth < 1200 ? setFullWidth(3) : setFullWidth(4)
+    }, [windowWidth])
+
+    return (
+        <Fade in={img ? true : false}>
+            <Grid
+                item
+                xs={12}
+                sm={id % fullWidth !== 0 && 6}
+                lg={id % fullWidth !== 0 && 4}>
+                <Card
+                    className={classes.root}
+                    component={Link}
+                    to={`/post/${_id}`}
+                    raised={isRaised}
+                    square
+                    onMouseEnter={() => setIsRaised(true)}
+                    onMouseLeave={() => setIsRaised(false)}>
+                    <CardMedia
+                        className={classes.media}
+                        image={img}
+                        title={title}
+                    />
+                    <Box display="flex"
+                        alignItems="center"
+                        justifyContent="flex-end"
+                        pr={1}>
+                        <VisibilityOutlinedIcon className={classes.viewIcon} />
+                        <Typography variant="caption" component="span" align="right">{views}</Typography>
+                    </Box>
+                    <CardContent className={classes.content}>
+                        <Typography
+                            variant="h2"
+                            align="center"
+                            gutterBottom>
+                            {title}
+                        </Typography>
+                        <Typography
+                            className={classes.date}
+                            variant="button"
+                            color="textSecondary"
+                            align="center"
+                            component="div"
+                            gutterBottom
+                            noWrap>
+                            {formateDate(date, (id % fullWidth !== 0) ? "short" : "long")}
+                            <Box
+                                display="flex"
+                                alignItems="center"
+                                justifyContent="center"
+                                m={1}>
+                                <StopSharpIcon className={classes.divideIcon} />
+                            </Box>
+                            {tags[0]}
+                        </Typography>
+
+                        <Typography variant="body2" className={classes.text}>{desc}</Typography>
+                    </CardContent>
+                </Card>
+            </Grid >
+        </Fade>
+    );
+}
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        minHeight: 450,
+        display: "flex",
+        flexDirection: "column",
+        textDecoration: "none",
+        border: `2px solid ${theme.palette.secondary.main}`,
+        "@media (max-width: 424px)": {
+            minHeight: 375
+        }
+    },
+    media: {
+        height: 0,
+        paddingTop: '56.25%', // 16:9
+    },
+    content: {
+        display: "flex",
+        flexDirection: "column",
+        flexGrow: 1,
+    },
+    date: {
+        marginTop: "auto",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    text: {
+        overflowY: "hidden",
+        maxHeight: 120,
+    },
+    divideIcon: {
+        fontSize: 12,
+        color: theme.palette.info.main,
+        transform: "rotate(45deg)",
+    },
+    viewIcon: {
+        fontSize: 12,
+        color: theme.palette.secondary.main,
+        marginRight: 5
+    }
+
+}));

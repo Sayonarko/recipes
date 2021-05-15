@@ -6,7 +6,7 @@ import Sidebar from "../components/sidebar"
 import CircularProgress from "../components/UI/circular-progress"
 import formateDate from "../components/helpers/formate-date"
 import { Facebook, Instagram, LinkedIn, Twitter, YouTube, StopSharp, VisibilityOutlined, FiberManualRecord } from "@material-ui/icons";
-
+import { API, API_ROUTER } from "../api/api"
 import { Link } from "react-router-dom"
 
 
@@ -21,26 +21,22 @@ export default function PostPage(props) {
     }, [card])
     //data
     useEffect(() => {
-        fetch(`http://localhost:4000/posts/${props.match.params.id}`)
-            .then(response => response.json())
-            .then(result => {
-                setCard(result)
+        API({...API_ROUTER.getPosts, url: API_ROUTER.getPosts.url + props.match.params.id})
+                    .then(result => {
+                        console.log(result.data);
+                setCard(result.data)
                 setRequestSucess(true)
             })
+            .catch(error => console.log(error))
     }, [props.match.params.id])
     //views page count
     useEffect(() => {
         setTimeout(() => {
-            fetch(`http://localhost:4000/posts/update/views/${props.match.params.id}`, {
-                method: 'PUT',
-                headers: {
-                    "Content-Type": 'application/json'
-                },
-                body: JSON.stringify({
-                    views: views + 1
-                })
-            })
-                .catch(error => console.log(error))
+            let body = JSON.stringify({
+                        views: views + 1
+                    })
+                API({...API_ROUTER.updateViews, url: API_ROUTER.updateViews.url + props.match.params.id, data: body})
+        .catch(error => console.log(error))
         }, 10000)
 
     }, [views])

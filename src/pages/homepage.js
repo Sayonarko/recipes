@@ -5,6 +5,8 @@ import Sidebar from "../components/sidebar"
 import Slider from "../components/slider"
 import Container from "../components/UI/container"
 import CircularProgress from "../components/UI/circular-progress"
+import { API, API_ROUTER } from "../api/api"
+
 
 export default function Homepage() {
     const [cards, setCards] = useState([])
@@ -16,10 +18,9 @@ export default function Homepage() {
     }
 
     useEffect(() => {
-        fetch("http://localhost:4000/posts")
-            .then(response => response.json())
-            .then(json => {
-                setCards(json)
+        API(API_ROUTER.getPosts)
+            .then(res => {
+                setCards(res.data)
                 setRequestSucess(true)
             })
             .catch(err => console.log(err))

@@ -1,5 +1,6 @@
 import { Avatar, Box, Divider, Typography, makeStyles, Input, InputLabel, Button } from '@material-ui/core';
 import React, { useState, useEffect } from 'react';
+import { API, API_ROUTER } from "../../api/api"
 
 
 export default function PostComponents(props) {
@@ -14,10 +15,9 @@ export default function PostComponents(props) {
     })
 
     useEffect(() => {
-        fetch(`http://localhost:4000/posts/${postId}`)
-            .then((response) => response.json())
-            .then(result => setComments(result.comments))
-            .catch(error => console.log(error))
+        API({...API_ROUTER.getPosts, url: API_ROUTER.getPosts.url + postId})
+        .then(res => setComments(res.data.comments))
+        .catch(err => console.log(err))
     }, [postId, update])
 
     function Comment(props) {
@@ -75,15 +75,8 @@ export default function PostComponents(props) {
     function addComment(event) {
         event.preventDefault()
         const newComments = [value, ...comments]
-        fetch(`http://localhost:4000/posts/update/comments/${postId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newComments)
-        })
-            .then(res => res.json())
-            .then(res => console.log(res))
+        API({...API_ROUTER.updateComments, url: API_ROUTER.updateComments.url + postId, data: JSON.stringify(newComments)})
+            .then(res => console.log(res.data))
             .then(() => setUpdate(!update))
             .catch(error => console.log(error))
         setValue({

@@ -4,6 +4,7 @@ import Container from "../components/UI/container"
 import RecipesCard from "../components/card"
 import Sidebar from "../components/sidebar"
 import CircularProgress from "../components/UI/circular-progress"
+import { API, API_ROUTER } from "../api/api"
 
 export default function TopPage() {
     const [cards, setCards] = useState([])
@@ -15,13 +16,12 @@ export default function TopPage() {
     }
 
     useEffect(() => {
-        async function fetchCards() {
-            const response = await fetch("http://localhost:4000/posts")
-            const json = await response.json()
-            setCards(json)
-            setRequestSucess(true)
-        }
-        fetchCards()
+        API(API_ROUTER.getPosts)
+            .then(res => {
+                setCards(res.data)
+                setRequestSucess(true)
+            })
+            .catch(err => console.log(err))
     }, [])
 
     function RenderHomepage() {

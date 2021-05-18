@@ -4,6 +4,7 @@ import { makeStyles, styled } from '@material-ui/core/styles'
 import React, { useState, useEffect } from "react"
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import formateDate from "../helpers/formate-date"
+import { API, API_ROUTER } from "../../api/api"
 
 
 export default function Slider(props) {
@@ -13,16 +14,18 @@ export default function Slider(props) {
     const [requestSucess, setRequestSucess] = useState(false)
 
 
-    function sortSlides(arr) {
-        return arr.sort((a, b) => b.likes - a.likes).slice(0, 4)
-    }
-
     useEffect(() => {
-        if (props.data.length) {
-            setSlides(sortSlides(props.data))
-            setRequestSucess(true)
+        const params = {
+            limit: 4,
+            sort: "likes"
         }
-    }, [props.data]);
+        API({...API_ROUTER.getPosts, params})
+            .then(res => {
+                setSlides(res.data)
+                setRequestSucess(true)
+            })
+            .catch(err => console.log(err))
+    }, []);
 
     useEffect(() => {
         if (slides.length) {

@@ -16,11 +16,10 @@ export default function PostPage(props) {
     const [requestSucess, setRequestSucess] = useState(false)
     const { views, title, date, img, desc, tags, author, ingredients, steps } = card
 
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [card])
     //data
     useEffect(() => {
+        window.scrollTo(0, 0)
+
         API({...API_ROUTER.getPosts, url: API_ROUTER.getPosts.url + props.match.params.id})
                     .then(result => {
                         console.log(result.data);

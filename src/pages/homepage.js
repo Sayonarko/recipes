@@ -58,7 +58,7 @@ export default function Homepage() {
 
     return (
         <Box component="section">
-            <Slider data={cards} />
+            <Slider />
             <Container
                 display="flex"
                 flexDirection="column"

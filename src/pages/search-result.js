@@ -17,7 +17,7 @@ export default function SearchResult(props) {
 
         let params = location.pathname.includes("tags")
             ? { ...API_ROUTER.searchTags, url: API_ROUTER.searchTags.url + props.match.params.searchRequest }
-            : {}
+            : {...API_ROUTER.search, url: API_ROUTER.search.url + props.match.params.searchRequest}
 
 
         API(params)
@@ -26,7 +26,7 @@ export default function SearchResult(props) {
                 setRequestSucess(true)
             })
             .catch(err => console.log(err))
-    }, [props.match.params.searchRequest])
+    }, [props.match.params.searchRequest, location.pathname])
 
     function RenderSearchResult() {
 

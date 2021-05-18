@@ -25,6 +25,11 @@ export const API_ROUTER = {
     },
     searchTags: {
         method: "GET",
-        url: "/posts/search/tags/"
+        url: "/search/tags/"
+    },
+
+    search: {
+        method: "GET",
+        url: "/search/"
     }
 }

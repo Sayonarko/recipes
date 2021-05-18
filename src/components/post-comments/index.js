@@ -20,6 +20,7 @@ export default function PostComponents(props) {
         .catch(err => console.log(err))
     }, [postId, update])
 
+
     function Comment(props) {
 
         function formateCommentDate(date) {
@@ -33,11 +34,11 @@ export default function PostComponents(props) {
             let min = newDate.getMinutes()
             if (min < 10) min = '0' + min
 
-            if ((Date.now() - Date.parse(date)) < 8.64e+7) {
+            if (new Date().getDate() === new Date(date).getDate()) {
                 return `сегодня @ ${hours}:${min} `
             }
 
-            if ((Date.now() - Date.parse(date)) > 8.64e+7 && (Date.now() - Date.parse(date)) < 8.64e+7 * 2) {
+            if (new Date().getDate() === new Date(date).getDate() + 1) {
                 return `вчера @ ${hours}:${min} `
             }
 

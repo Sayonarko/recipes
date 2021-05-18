@@ -1,47 +1,27 @@
 import { Typography, Button, makeStyles, styled } from "@material-ui/core"
 import React, { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 export default function BurgerMenu() {
+    const location = useLocation()
 
     const classes = useStyles()
-    const localBtn = sessionStorage.getItem("btn");
-    const [btn, setBtn] = useState(localBtn ? JSON.parse(localBtn) :
-        [
-            {
-                id: 0,
-                name: "Главная",
-                active: true,
-                href: "/"
-
-            },
-            {
-                id: 1,
-                name: "Популярное",
-                active: false,
-                href: "/popular"
-            },
-            {
-                id: 3,
-                name: "О нас",
-                active: false,
-                href: "/about"
-
-            }
-        ]
-    );
+    const btn = [
+        {
+            name: "Главная",
+            href: "/"
+        },
+        {
+            name: "Популярное",
+            href: "/popular"
+        },
+        {
+            name: "О нас",
+            href: "/about"
+        }
+    ]
     const [open, setOpen] = useState(false);
 
-
-    function changeActive(x) {
-        let newBtn = [...btn];
-        newBtn.forEach(item => {
-            (item.id === x) ? item.active = true : item.active = false;
-        });
-        setBtn(newBtn);
-        sessionStorage.setItem("btn", JSON.stringify(btn));
-        setOpen(false);
-    }
 
     useEffect(() => {
         const body = document.querySelector("body");
@@ -67,14 +47,14 @@ export default function BurgerMenu() {
                 style={{ transform: open ? "translateX(0)" : "translateX(100%)" }}
                 className={classes.menu}>
                 <ul style={{ padding: 0 }}>
-                    {btn.map(({ id, name, active, href }) => {
+                    {btn.map(({ name, href }) => {
                         return (
-                            <li key={id}
+                            <li key={name}
                                 className={classes.menuItem}>
                                 <MenuItem
-                                    isactive={active ? 1 : 0}
+                                    isactive={location.pathname === href ? 1 : 0}
                                     to={href}
-                                    onClick={() => changeActive(id)}>
+                                    onClick={() => setOpen(false)}>
                                     {name}
                                 </MenuItem>
                             </li>
@@ -82,7 +62,11 @@ export default function BurgerMenu() {
                     })}
                 </ul>
                 <AddPostLink to="/add-new-post">
-                    <AddPostButton onClick={() => setOpen(false)}>добавить пост</AddPostButton>
+                    <AddPostButton
+                        onClick={() => setOpen(false)}
+                        isactive={location.pathname === "/add-new-post" ? 1 : 0}>
+                        добавить пост
+                         </AddPostButton>
                 </AddPostLink>
                 <Typography align="center" color="secondary">©2021 Sergeevna</Typography>
             </nav>
@@ -177,9 +161,9 @@ const AddPostLink = styled(Link)({
 
 
 
-const AddPostButton = styled(Button)({
-    borderColor: "#666666",
-    color: "#666666",
+const AddPostButton = styled(Button)(props => ({
+    borderColor: props.isactive ? props.theme.palette.warning.main : "#666666",
+    color: props.isactive ? props.theme.palette.warning.main : "#666666",
     padding: 5,
     fontSize: 16
-})
+}))

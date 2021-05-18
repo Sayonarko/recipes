@@ -46,7 +46,7 @@ function Menu() {
                             key={name}>
 
                             <MenuItem
-                                isactive={ location.pathname === href ? true : false}
+                                isactive={ location.pathname === href ? 1 : 0}
                                 to={href}>
                                 {name}
                             </MenuItem>
@@ -54,7 +54,7 @@ function Menu() {
                     );
                 })}
                 <AddPostLink to="/add-new-post">
-                    <AddPostButton isactive={location.pathname === "/add-new-post" ? true : false}>добавить пост</AddPostButton>
+                    <AddPostButton isactive={location.pathname === "/add-new-post" ? 1 : 0}>добавить пост</AddPostButton>
                 </AddPostLink>
             </Box>
         </Box>

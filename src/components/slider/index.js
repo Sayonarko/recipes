@@ -65,7 +65,7 @@ export default function Slider(props) {
                                     <Typography variant="h1" className={classes.title}>{title}</Typography>
                                     <Typography variant="button" className={classes.date}>{formateDate(date)}</Typography>
                                     <Typography variant="body1" className={classes.text}>{desc}</Typography>
-                                    <SliderButton as="a" href={`post/${_id}`}>read more</SliderButton>
+                                    <SliderButton as="a" href={`post/${_id}`}>читать дальше</SliderButton>
                                 </Box>
                             </Fade>
                         );

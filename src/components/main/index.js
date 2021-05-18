@@ -17,6 +17,7 @@ export default function Main() {
                 <Route path='/popular' exact component={TopPage} />
                 <Route path='/about' exact component={AboutPage} />
                 <Route path="/post/:id" render={props => (<PostPage {...props} />)} />
+                <Route path="/search/tags/:searchRequest" render={props => (<SearchResult {...props} />)} />
                 <Route path="/search/:searchRequest" render={props => (<SearchResult {...props} />)} />
                 <Route path='*' exact component={NotFoundPage} />
             </Switch>

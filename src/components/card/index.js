@@ -6,7 +6,7 @@ import StopSharpIcon from '@material-ui/icons/StopSharp';
 import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
 import { Link } from "react-router-dom";
 
-export default function RecipesCard({ views, title, date, img, desc, link, tags, _id, id }) {
+export default function RecipesCard({ views, title, date, img, desc, tags, _id, id, small }) {
     const classes = useStyles();
     const [isRaised, setIsRaised] = useState(false)
     const [windowWidth, setWindowWith] = useState(0)
@@ -22,12 +22,17 @@ export default function RecipesCard({ views, title, date, img, desc, link, tags,
     }, []);
 
     useEffect(() => {
-        windowWidth < 1200 ? setFullWidth(3) : setFullWidth(4)
-    }, [windowWidth])
+        if (small) {
+            setFullWidth(0)
+        } else {
+            windowWidth < 1200 ? setFullWidth(3) : setFullWidth(4)
+        }
+    }, [windowWidth, small])
 
     return (
         <Fade in={img ? true : false}>
             <Grid
+                
                 item
                 xs={12}
                 sm={id % fullWidth !== 0 && 6}

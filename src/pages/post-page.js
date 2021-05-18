@@ -143,7 +143,7 @@ export default function PostPage(props) {
                                     {tags.map(item => <Typography
                                         key={item}
                                         component={Link}
-                                        to={`/search/${item}`}
+                                        to={`/search/tags/${item}`}
                                         className={classes.tagLink}
                                         variant="button"
                                         color="textSecondary"
@@ -283,6 +283,7 @@ const useStyles = makeStyles(theme => ({
         textDecoration: "none",
         transition: "color 0.3s ease",
         marginRight: 10,
+        lineHeight: "18px",
 
         "&:hover": {
             color: theme.palette.info.main

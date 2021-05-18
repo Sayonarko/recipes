@@ -22,5 +22,9 @@ export const API_ROUTER = {
         headers: {
             "Content-Type": 'application/json'
         },
+    },
+    searchTags: {
+        method: "GET",
+        url: "/posts/search/tags/"
     }
 }

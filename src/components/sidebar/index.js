@@ -38,13 +38,13 @@ export default function Sidebar() {
 
     function CollapseTags(props) {
         const [expanded, setExpanded] = useState(false)
-        const tags = ["Сладкое", "Выпечка", "Кондитер", "Торты", "Рецепты", "Фрукты", "Овощи", "Первое", "Второе", "Напитки", "Закуски", "Совет"]
+        const tags = ["Сладкое", "Выпечка", "Статья", "Завтрак", "Рецепты", "Фрукты", "Овощи", "Первое", "Второе", "Напитки", "Закуски", "Совет"]
 
         return (
             <>
                 <Collapse in={expanded} timeout={300} collapsedHeight={68}>
                     <Box>
-                        {tags.map(item => <Link key={item} to={`/search/${item}`} style={{ textDecoration: "none" }}
+                        {tags.map(item => <Link key={item} to={`/search/tags/${item}`} style={{ textDecoration: "none" }}
                         ><TagButton >{item}</TagButton></Link>)}
                     </Box>
                 </Collapse>

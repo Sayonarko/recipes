@@ -1,6 +1,67 @@
-import React, { useState } from "react";
-import { Box, Button, styled} from "@material-ui/core";
-import { Link } from "react-router-dom";
+import React from "react"
+import { Box, Button, styled } from "@material-ui/core"
+import { Link, useLocation } from "react-router-dom"
+
+
+function Menu() {
+    const location = useLocation()
+    const btn = [
+            {
+                name: "Главная",
+                href: "/"
+
+            },
+            {
+                name: "Популярное",
+                href: "/popular"
+            },
+            {
+                name: "О нас",
+                href: "/about"
+            }
+        ]
+
+    return (
+        <Box component="nav"
+            display={{ xs: "none", sm: "block" }}
+            height="100%"
+            flexGrow="1"
+            marginLeft={{ sm: 4, md: 10 }}>
+
+            <Box component="ul"
+                display="flex"
+                height="100%"
+                pl={0}
+                m={0}>
+
+                {btn.map(({ name, href }) => {
+
+                    return (
+                        <Box
+                            component="li"
+                            display="flex"
+                            pl={2}
+                            pr={2}
+                            ml={{ md: 5 }}
+                            key={name}>
+
+                            <MenuItem
+                                isactive={ location.pathname === href ? true : false}
+                                to={href}>
+                                {name}
+                            </MenuItem>
+                        </Box>
+                    );
+                })}
+                <AddPostLink to="/add-new-post">
+                    <AddPostButton isactive={location.pathname === "/add-new-post" ? true : false}>добавить пост</AddPostButton>
+                </AddPostLink>
+            </Box>
+        </Box>
+    );
+}
+export default Menu
+
 
 const MenuItem = styled(Link)((props) => ({
     position: "relative",
@@ -23,7 +84,7 @@ const MenuItem = styled(Link)((props) => ({
         bottom: 0,
         backgroundColor: props.theme.palette.info.main,
         display: "block",
-        content: '""' ,
+        content: '""',
         height: 3,
         width: props.isactive ? "100%" : "0%",
         transform: "translateX(-50%)",
@@ -41,89 +102,9 @@ const AddPostLink = styled(Link)({
 
 
 
-const AddPostButton = styled(Button)({
-    borderColor: "#666666",
-    color: "#666666",
+const AddPostButton = styled(Button)( props => ({
+    borderColor: props.isactive ? props.theme.palette.warning.main : "#666666",
+    color: props.isactive ? props.theme.palette.warning.main : "#666666",
     padding: 5,
     fontSize: 16
-})
-
-function Menu() {
-
-    const localBtn = sessionStorage.getItem("btn");
-    const [btn, setBtn] = useState(localBtn ? JSON.parse(localBtn) :
-        [
-            {
-                id: 0,
-                name: "Главная",
-                active: true,
-                href: "/"
-
-            },
-            {
-                id: 1,
-                name: "Популярное",
-                active: false,
-                href: "/popular"
-            },
-            {
-                id: 3,
-                name: "О нас",
-                active: false,
-                href: "/about"
-
-            }
-        ]
-    );
-
-    function changeActive(x) {
-        let newBtn = [...btn];
-
-        newBtn.forEach(item => {
-            (item.id === x) ? item.active = true : item.active = false;
-        });
-        setBtn(newBtn);
-        sessionStorage.setItem("btn", JSON.stringify(btn));
-    }
-
-    return (
-        <Box component="nav"
-            display={{ xs: "none", sm: "block" }}
-            height="100%"
-            flexGrow="1"
-            marginLeft={{ sm: 4, md: 10 }}>
-
-            <Box component="ul"
-                display="flex"
-                height="100%"
-                pl={0}
-                m={0}>
-
-                {btn.map(({ id, name, active, href }) => {
-
-                    return (
-                        <Box
-                            component="li"
-                            display="flex"
-                            pl={2}
-                            pr={2}
-                            ml={{ md: 5 }}
-                            key={id}>
-
-                            <MenuItem
-                                isactive={active ? 1 : 0}
-                                to={href}
-                                onClick={() => changeActive(id)}>
-                                {name}
-                            </MenuItem>
-                        </Box>
-                    );
-                })}
-                <AddPostLink to="/add-new-post">
-                    <AddPostButton>добавить пост</AddPostButton>
-                </AddPostLink>
-            </Box>
-        </Box>
-    );
-}
-export default Menu
+}))

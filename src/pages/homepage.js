@@ -15,7 +15,7 @@ export default function Homepage() {
 
     useEffect(() => {
         const params = {
-            limit: moreCards,
+            limit: 10,
             sort: "date"
         }
         API({...API_ROUTER.getPosts, params})
@@ -24,7 +24,7 @@ export default function Homepage() {
                 setRequestSucess(true)
             })
             .catch(err => console.log(err))
-    }, [moreCards])
+    }, [])
 
     function RenderHomepage() {
 
@@ -50,7 +50,7 @@ export default function Homepage() {
                     </Box>
                 </Grid>
                 <Grid item xs={12} md={4} lg={3}>
-                    <Sidebar data={cards} />
+                    <Sidebar />
                 </Grid>
             </Grid>
         )

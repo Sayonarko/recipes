@@ -7,6 +7,7 @@ import TopPage from "../../pages/popular";
 import NotFoundPage from "../../pages/not-found";
 import PostPage from "../../pages/post-page";
 import SearchResult from "../../pages/search-result";
+import AddPost from "../../pages/add-post";
 
 export default function Main() {
 
@@ -16,6 +17,7 @@ export default function Main() {
                 <Route path='/' exact component={Homepage} />
                 <Route path='/popular' exact component={TopPage} />
                 <Route path='/about' exact component={AboutPage} />
+                <Route path='/add-new-post' exact component={AddPost} />
                 <Route path="/post/:id" render={props => (<PostPage {...props} />)} />
                 <Route path="/search/tags/:searchRequest" render={props => (<SearchResult {...props} />)} />
                 <Route path="/search/:searchRequest" render={props => (<SearchResult {...props} />)} />

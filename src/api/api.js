@@ -1,13 +1,21 @@
 import axios from "axios"
 
 export const API = axios.create({
-    baseURL: "https://recipes-api-api-api.herokuapp.com/",
+    baseURL: "https://recipes-api-api-api.herokuapp.com",
 })
 
 export const API_ROUTER = {
     getPosts: {
         method: "GET",
         url: "/posts/",
+    },
+    addPost: {
+        method: "POST",
+        url: "/posts",
+        headers: {
+            "Content-Type": 'application/json',
+            "Accept": "*/*"
+        },
     },
     updateViews: {
         method: "PUT",

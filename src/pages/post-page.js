@@ -7,7 +7,7 @@ import CircularProgress from "../components/UI/circular-progress"
 import formateDate from "../components/helpers/formate-date"
 import { Facebook, Instagram, LinkedIn, Twitter, YouTube, StopSharp, VisibilityOutlined, FiberManualRecord } from "@material-ui/icons";
 import { API, API_ROUTER } from "../api/api"
-import { Link } from "react-router-dom"
+import { Link, useHistory} from "react-router-dom"
 
 
 export default function PostPage(props) {
@@ -15,16 +15,19 @@ export default function PostPage(props) {
     const [card, setCard] = useState({})
     const [requestSucess, setRequestSucess] = useState(false)
     const { views, title, date, img, desc, tags, author, ingredients, steps } = card
-
+    const history = useHistory()
     //data
     useEffect(() => {
         window.scrollTo(0, 0)
 
         API({...API_ROUTER.getPosts, url: API_ROUTER.getPosts.url + props.match.params.id})
                     .then(result => {
-                        console.log(result.data);
-                setCard(result.data)
-                setRequestSucess(true)
+                        if (result.data) {
+                            setCard(result.data)
+                            setRequestSucess(true)
+                        } else {
+                            history.push("/page-not-found")
+                        }
             })
             .catch(error => console.log(error))
     }, [props.match.params.id])

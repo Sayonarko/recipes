@@ -30,9 +30,9 @@ export default function RecipesCard({ views, title, date, img, desc, tags, _id, 
     }, [windowWidth, small])
 
     return (
-        <Fade in={img ? true : false}>
+        <Fade in={_id ? true : false}>
             <Grid
-                
+
                 item
                 xs={12}
                 sm={id % fullWidth !== 0 && 6}
@@ -59,19 +59,21 @@ export default function RecipesCard({ views, title, date, img, desc, tags, _id, 
                     </Box>
                     <CardContent className={classes.content}>
                         <Typography
+                            className={classes.title}
                             variant="h2"
                             align="center"
                             gutterBottom>
                             {title}
                         </Typography>
                         <Typography
+                            noWrap
                             className={classes.date}
                             variant="button"
                             color="textSecondary"
                             align="center"
                             component="div"
                             gutterBottom
-                            noWrap>
+                        >
                             {formateDate(date, (id % fullWidth !== 0) ? "short" : "long")}
                             <Box
                                 display="flex"
@@ -111,11 +113,16 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: "column",
         flexGrow: 1,
     },
+    title: {
+        maxHeight: 65,
+        overflow: 'hidden',
+    },
     date: {
         marginTop: "auto",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        overflow: "visible",
     },
     text: {
         overflowY: "hidden",

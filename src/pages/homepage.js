@@ -35,7 +35,7 @@ export default function Homepage() {
                 <Grid item xs={12} md={8} lg={9}>
                     <Grid container spacing={6}>
                         {
-                            cards.map((item, id) => id < moreCards && <RecipesCard {...item} id={id} key={item.title} />)
+                            cards.map((item, id) => id < moreCards && <RecipesCard {...item} id={id} key={item._id} />)
                         }
                     </Grid>
                     <Box

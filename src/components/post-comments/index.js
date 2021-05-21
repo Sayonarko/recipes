@@ -47,7 +47,6 @@ export default function PostComponents(props) {
 
         return (
             <Box display="flex"
-                alignItems="center"
                 flexDirection="row"
                 className={classes.root}
             >

@@ -236,6 +236,11 @@ export const theme = createMuiTheme({
                     fontSize: 14,
                 },
             }
+        },
+        MuiAlert: {
+            root: {
+                alignItems: "center",
+            }
         }
     },
 

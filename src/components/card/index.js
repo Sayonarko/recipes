@@ -127,6 +127,9 @@ const useStyles = makeStyles((theme) => ({
     text: {
         overflowY: "hidden",
         maxHeight: 120,
+        maxWidth: 365,
+        margin: "0 auto",
+        textAlign: "center",
     },
     divideIcon: {
         fontSize: 12,

@@ -273,7 +273,6 @@ const useStyles = makeStyles(theme => ({
         fontSize: 12,
         color: theme.palette.info.main,
         transform: "rotate(45deg)",
-        marginRight: 5
     },
     viewIcon: {
         fontSize: 16,

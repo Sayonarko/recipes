@@ -31,13 +31,19 @@ export const API_ROUTER = {
             "Content-Type": 'application/json'
         },
     },
+
+    search: {
+        method: "GET",
+        url: "/search/"
+    },
+
     searchTags: {
         method: "GET",
         url: "/search/tags/"
     },
 
-    search: {
+    searchDate: {
         method: "GET",
-        url: "/search/"
+        url: "/search/date/"
     }
 }

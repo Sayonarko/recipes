@@ -5,36 +5,43 @@ import formateDate from "../helpers/formate-date"
 import CircularProgress from "../UI/circular-progress"
 import bigBanner from "../../img/big-banner.png"
 import smallBanner from "../../img/small-banner.png"
-import { Link } from "react-router-dom"
+import { Link, useHistory, useLocation } from "react-router-dom"
 import { API, API_ROUTER } from "../../api/api"
 
 export default function Sidebar() {
     const classes = useStyles()
+    const history = useHistory()
     const [cards, setCards] = useState([])
     const [requestSucess, setRequestSucess] = useState(false)
-
+    const location = useLocation()
+    console.log();
     function defaultDate() {
         const date = new Date()
 
         let mm = date.getMonth() + 1
         if (mm < 10) mm = '0' + mm
-
         let yyyy = date.getFullYear()
+
+        if (location.pathname.includes("/search/date/")) {
+            return location.pathname.replace("/search/date/", "")
+        }
         return `${yyyy}-${mm}`
     }
 
     useEffect(() => {
-       const params = {
+
+        const params = {
             limit: 3,
             sort: "likes"
         }
-            API({...API_ROUTER.getPosts, params})
+        API({ ...API_ROUTER.getPosts, params })
             .then(res => {
                 setCards(res.data)
                 setRequestSucess(true)
             })
             .catch(err => console.log(err))
     }, []);
+
 
     function CollapseTags(props) {
         const [expanded, setExpanded] = useState(false)
@@ -58,17 +65,36 @@ export default function Sidebar() {
         return (
 
             <Grid container spacing={0}>
-                <Grid item xs={12} sm={6} md={12}>
+                <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    md={12}>
                     <CardMedia
                         image={bigBanner}
                         className={classes.bigBanner}
                         title="banner" />
                     <Box p={6} >
 
-                        <Typography className={classes.title} variant="h2" gutterBottom>Архив</Typography>
+                        <Typography
+                            className={classes.title}
+                            variant="h2"
+                            gutterBottom>
+                            Архив
+                               </Typography>
                         <Divider className={classes.titleDivider} />
-                        <Input type="month" fullWidth disableUnderline defaultValue={defaultDate()} />
-                        <Typography className={classes.title} variant="h2" gutterBottom>Тэги</Typography>
+                        <Input
+                            type="month"
+                            fullWidth
+                            disableUnderline
+                            defaultValue={defaultDate()}
+                            onChange={(e) => history.push(`/search/date/${e.target.value}`)} />
+                        <Typography
+                            className={classes.title}
+                            variant="h2"
+                            gutterBottom>
+                            Тэги
+                        </Typography>
                         <Divider className={classes.titleDivider} />
                         <CollapseTags />
                     </Box >

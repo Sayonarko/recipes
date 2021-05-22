@@ -102,7 +102,7 @@ export const theme = createMuiTheme({
         button: {
             fontSize: 12,
             fontWeight: 600,
-            letterSpacing: 1.5,
+            letterSpacing: 1.15,
             lineHeight: "12px",
 
             [globalTheme.breakpoints.down('xs')]: {
@@ -136,7 +136,7 @@ export const theme = createMuiTheme({
                 padding: '0px 30px',
                 height: 30,
                 fontSize: 12,
-                letterSpacing: 2,
+                letterSpacing: 1.15,
                 fontWeight: 600,
         
                 [globalTheme.breakpoints.down('xs')]: {

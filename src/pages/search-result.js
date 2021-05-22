@@ -15,10 +15,24 @@ export default function SearchResult(props) {
     useEffect(() => {
         window.scrollTo(0, 0)
 
-        let params = location.pathname.includes("tags")
-            ? { ...API_ROUTER.searchTags, url: API_ROUTER.searchTags.url + props.match.params.searchRequest }
-            : {...API_ROUTER.search, url: API_ROUTER.search.url + props.match.params.searchRequest}
+        let params = {}
 
+        if (location.pathname.includes("tags")) {
+            params = {
+                ...API_ROUTER.searchTags,
+                url: API_ROUTER.searchTags.url + props.match.params.searchRequest
+            }
+        } else if (location.pathname.includes("date")) {
+            params = {
+                ...API_ROUTER.searchDate,
+                url: API_ROUTER.searchDate.url + props.match.params.searchRequest
+            }
+        } else {
+            params = {
+                ...API_ROUTER.search,
+                url: API_ROUTER.search.url + props.match.params.searchRequest
+            }
+        }
 
         API(params)
             .then(res => {
@@ -37,7 +51,7 @@ export default function SearchResult(props) {
                 <Grid item xs={12} md={8} lg={9}>
                     <Grid container spacing={6}>
                         {
-                            cards.map((item, id) => <RecipesCard {...item} small={true} id={id} key={item.title} />)
+                            cards.map((item, id) => <RecipesCard {...item} small={true} id={id} key={item._id} />)
                         }
                     </Grid>
                 </Grid>

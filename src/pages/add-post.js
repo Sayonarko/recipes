@@ -24,6 +24,8 @@ export default function AddPost() {
         tags: []
     })
 
+    console.log(value.ingredients)
+
     useEffect(() => {
         window.scrollTo(0, 0)
 
@@ -167,7 +169,8 @@ export default function AddPost() {
                     <TextField
                         id="desc"
                         multiline
-                        rows="7"
+                        rows="5"
+                        rowsMax="30"
                         className={classes.input}
                         InputProps={{ disableUnderline: true }}
                         required
@@ -186,6 +189,9 @@ export default function AddPost() {
                         id="ingredients"
                         className={classes.input}
                         InputProps={{ disableUnderline: true }}
+                        multiline
+                        rows="5"
+                        rowsMax="30"
                         placeholder="Перечислите ингредиенты через точку с запятой: 1кг картофеля; 1 ч.л. соли; и.тд"
                         value={value.ingredients.join("; ")}
                         onChange={e => setValue({
@@ -202,10 +208,11 @@ export default function AddPost() {
                         id="steps"
                         className={classes.input}
                         multiline
-                        rows="7"
+                        rows="5"
+                        rowsMax="30"
                         placeholder={`Перечислите шаги через точку с запятой:\nВскипятить воду;\nДобавить овощи;\n... и.т.д`}
                         InputProps={{ disableUnderline: true }}
-                        value={value.steps.join(";\n")}
+                        value={value.steps.join("; ")}
                         onChange={e => setValue({
                             ...value,
                             steps: e.target.value.split("; ")
@@ -240,6 +247,7 @@ export default function AddPost() {
                         <input
                             type="file"
                             id="photo"
+                            required
                             style={{ display: 'none' }}
                             ref={uploadInputRef}
                             onChange={() => encodeImage()} />

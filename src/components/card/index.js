@@ -125,7 +125,7 @@ const useStyles = makeStyles((theme) => ({
         overflow: "visible",
     },
     text: {
-        overflowY: "hidden",
+        overflow: "hidden",
         maxHeight: 120,
         maxWidth: 365,
         margin: "0 auto",

@@ -24,8 +24,6 @@ export default function AddPost() {
         tags: []
     })
 
-    console.log(value.ingredients)
-
     useEffect(() => {
         window.scrollTo(0, 0)
 
@@ -248,7 +246,7 @@ export default function AddPost() {
                             type="file"
                             id="photo"
                             required
-                            style={{ display: 'none' }}
+                            style={{ opacity: 0, position: 'absolute', top: 0, left: 0 }}
                             ref={uploadInputRef}
                             onChange={() => encodeImage()} />
                     </label>

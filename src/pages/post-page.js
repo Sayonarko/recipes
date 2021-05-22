@@ -113,17 +113,16 @@ export default function PostPage(props) {
 
                         <Typography variant="h1" gutterBottom>{title}</Typography>
                         <Typography variant="body1" gutterBottom>{desc}</Typography>
-
-                        {(ingredients && ingredients.length)
-                            && <Box>
+                        {(ingredients && ingredients.length) 
+                           ?  <Box>
                                 <Typography variant="h2" gutterBottom>Ингредиенты</Typography>
                                 <List>
                                     {ingredients.map(item => <ListItem key={item} disableGutters><FiberManualRecord className={classes.divideIcon} />{item}</ListItem>)}
                                 </List>
-                            </Box>}
-
+                            </Box>
+                            : null}
                         {(steps && steps.length)
-                            && <Box>
+                            ? <Box>
                                 <Typography variant="h2" gutterBottom>Приготовление</Typography>
                                 {steps.map((item, id) => {
                                     return (
@@ -133,8 +132,8 @@ export default function PostPage(props) {
                                         </div>
                                     )
                                 })}
-                            </Box>}
-
+                            </Box>
+                            : null}
                         {/* tags & socials */}
                         <Divider className={classes.divider} />
                         <Grid container spacing={3}>

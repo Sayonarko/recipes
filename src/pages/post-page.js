@@ -48,7 +48,9 @@ export default function PostPage(props) {
         return (
 
             <Fade in={requestSucess}>
-                <Grid container spacing={6}>
+                <Grid
+                className={classes.root}
+                container spacing={6}>
                     <Grid item xs={12} md={8} lg={9}>
 
                         {/* author and date */}
@@ -56,6 +58,7 @@ export default function PostPage(props) {
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <Box
+                                    
                                     display="flex"
                                     alignItems="center"
                                     justifyContent={{ xs: "flex-end", sm: "flex-start" }}
@@ -112,23 +115,23 @@ export default function PostPage(props) {
                         {/* main  */}
 
                         <Typography variant="h1" gutterBottom>{title}</Typography>
-                        <Typography variant="body1" gutterBottom>{desc}</Typography>
+                        <Typography className={classes.desc} variant="body1">{desc}</Typography>
                         {(ingredients && ingredients.length) 
                            ?  <Box>
-                                <Typography variant="h2" gutterBottom>Ингредиенты</Typography>
-                                <List>
-                                    {ingredients.map(item => <ListItem key={item} disableGutters><FiberManualRecord className={classes.divideIcon} />{item}</ListItem>)}
+                                <Typography variant="h2">Ингредиенты</Typography>
+                                <List disablePadding>
+                                    {ingredients.map(item => <ListItem key={item} className={classes.listItem} disableGutters>{item}</ListItem>)}
                                 </List>
                             </Box>
                             : null}
                         {(steps && steps.length)
                             ? <Box>
-                                <Typography variant="h2" gutterBottom>Приготовление</Typography>
+                                <Typography variant="h2">Приготовление</Typography>
                                 {steps.map((item, id) => {
                                     return (
                                         <div key={id}>
-                                            <Typography variant="h3" gutterBottom>Шаг {id + 1}</Typography>
-                                            <Typography variant="body1" gutterBottom>{item}</Typography>
+                                            <Typography variant="h3">Шаг {id + 1}</Typography>
+                                            <Typography variant="body1">{item}</Typography>
                                         </div>
                                     )
                                 })}
@@ -240,6 +243,19 @@ export default function PostPage(props) {
 }
 
 const useStyles = makeStyles(theme => ({
+    root: {
+        "& .MuiTypography-h2,.MuiTypography-body1, .MuiList-root": {
+            marginBottom: 24,
+
+            [theme.breakpoints.down("sm")]: {
+                marginBottom: 20,
+            },
+    
+            [theme.breakpoints.down("xs")]: {
+                marginBottom: 10,
+            }
+        }
+    },
     image: {
         height: 0,
         paddingTop: "21.02%",
@@ -274,10 +290,36 @@ const useStyles = makeStyles(theme => ({
         color: theme.palette.info.main,
         transform: "rotate(45deg)",
     },
+
     viewIcon: {
         fontSize: 16,
         color: theme.palette.secondary.main,
         marginRight: 5
+    },
+    desc: {
+        textIndent: "1.5em",
+    },
+    listItem: {
+        position: "relative",
+
+        "&:before": {
+            position: "absolute",
+            content: "''",
+            top: "calc(50% - 4px)",
+            left: -12,
+            backgroundColor: theme.palette.info.main,
+            width: 7,
+            height: 7,
+            borderRadius: "50%",
+
+            [theme.breakpoints.down("xs")]: {
+                width: 5,
+                height: 5,
+                left: -10,
+                top: "calc(50% - 2px)",
+
+            }
+        }
     },
     tagLink: {
         textDecoration: "none",

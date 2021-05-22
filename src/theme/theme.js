@@ -80,6 +80,7 @@ export const theme = createMuiTheme({
                 'Poppins',
                 'sans-serif',
             ].join(','),
+            whiteSpace: "pre-wrap",
         },
         body2: {
             fontSize: 14,
@@ -91,6 +92,7 @@ export const theme = createMuiTheme({
                 'Poppins',
                 'sans-serif',
             ].join(','),
+            whiteSpace: "pre-wrap",
         },
         caption: {
             fontSize: 10,

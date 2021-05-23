@@ -155,6 +155,7 @@ const useStyles = makeStyles(theme => ({
         maxHeight: "100px",
         margin: "30px auto 20px",
         overflowY: "hidden",
+        textAlign: "center",
 
         "@media (max-width: 767px)": {
             margin: "10px auto 0",

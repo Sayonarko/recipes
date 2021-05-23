@@ -106,29 +106,37 @@ export default function AddPost() {
                 pb={{ xs: 5, sm: 10 }}>
                 {requestPending && <Box className={classes.request}><CircularProgress size="75px" /></Box>}
                 <Snackbar
-                    open={requestSucess || requestError.error}
-                    onClose={() => {
-                        setRequestSucess(false)
-                        setRequestError({
-                            ...requestError,
-                            error: false
-                        })
-                    }}
+                    open={requestSucess}
+                    onClose={() => setRequestSucess(false)}
                     TransitionComponent={Fade}
                     anchorOrigin={{ vertical: "top", horizontal: "center" }}
                     autoHideDuration={5000} >
                     <Alert
-                        onClose={() => {
-                            setRequestSucess(false)
-                            setRequestError({
-                                ...requestError,
-                                error: false
-                            })
-                        }}
+                        onClose={() => setRequestSucess(false)}
                         elevation={6}
                         variant="filled"
-                        severity={requestSucess ? "success" : "error"}>
-                        {requestSucess ? "Спасибо! Ваш пост скоро будет опубликован!" : requestError.message}
+                        severity="success">
+                        "Спасибо! Ваш пост скоро будет опубликован!"
+                    </Alert>
+                </Snackbar>
+                <Snackbar
+                    open={requestError.error}
+                    onClose={() => setRequestError({
+                        ...requestError,
+                        error: false
+                    })}
+                    TransitionComponent={Fade}
+                    anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                    autoHideDuration={5000} >
+                    <Alert
+                    onClose={() => setRequestError({
+                        ...requestError,
+                        error: false
+                    })}
+                        elevation={6}
+                        variant="filled"
+                        severity="error">
+                        {requestError.message}
                     </Alert>
                 </Snackbar>
                 <Typography

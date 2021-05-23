@@ -19,13 +19,22 @@ export default function Slider(props) {
             limit: 4,
             sort: "likes"
         }
-        API({...API_ROUTER.getPosts, params})
+        API({ ...API_ROUTER.getPosts, params })
             .then(res => {
-                setSlides(res.data)
+                setSlides([
+                    {
+                        ...res.data[0],
+                        active: true
+                    },
+                    res.data[1],
+                    res.data[2],
+                    res.data[3]
+                ])
                 setRequestSucess(true)
             })
             .catch(err => console.log(err))
     }, []);
+
 
     useEffect(() => {
         if (slides.length) {
@@ -54,8 +63,9 @@ export default function Slider(props) {
                     display="flex"
                     width="100%"
                     flexGrow="1"
-                    height="100%">
-                    {slides.map(({ img, title, date, desc, link, active, _id }, id) => {
+                    height="100%"
+                    >
+                    {slides.map(({ img, title, date, desc, active, _id }, id) => {
                         return (
                             <Fade in={active} key={id}>
                                 <Box
@@ -64,7 +74,7 @@ export default function Slider(props) {
                                     alignItems="center"
                                     width="100vw"
                                     p={{ xs: 6, sm: 9 }}
-                                    style={{ backgroundImage: `url(${img})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center center" }}>
+                                    style={{ backgroundBlendMode: "multiply", backgroundImage: `url(${img})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center center", backgroundColor: "rgba(0,0,0, 0.4)" }}>
                                     <Typography variant="h1" className={classes.title}>{title}</Typography>
                                     <Typography variant="button" className={classes.date}>{formateDate(date)}</Typography>
                                     <Typography variant="body1" className={classes.text}>{desc}</Typography>

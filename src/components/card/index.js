@@ -96,10 +96,12 @@ export default function RecipesCard({ views, title, date, img, desc, tags, _id, 
 const useStyles = makeStyles((theme) => ({
     root: {
         minHeight: 450,
+        height: "calc(100% - 4px)",
         display: "flex",
         flexDirection: "column",
         textDecoration: "none",
         border: `2px solid ${theme.palette.secondary.main}`,
+
         "@media (max-width: 424px)": {
             minHeight: 375
         }

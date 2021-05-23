@@ -55,7 +55,7 @@ export default function AddPost() {
                 canvas.height = rawImage.height;
                 ctx.drawImage(rawImage, 0, 0);
 
-                const data = canvas.toDataURL('image/webp', 0.1)
+                const data = canvas.toDataURL('image/webp', 0.65)
 
                 setValue({
                     ...value,

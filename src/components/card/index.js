@@ -79,7 +79,7 @@ export default function RecipesCard({ views, title, date, img, desc, tags, _id, 
                                 display="flex"
                                 alignItems="center"
                                 justifyContent="center"
-                                m={1}>
+                                m={{xs: "0 3px 3px 2px", sm: "5px"}}>
                                 <StopSharpIcon className={classes.divideIcon} />
                             </Box>
                             {tags[0]}
@@ -137,6 +137,10 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 12,
         color: theme.palette.info.main,
         transform: "rotate(45deg)",
+
+        [theme.breakpoints.down("xs")]: {
+            fontSize: 10
+        }
     },
     viewIcon: {
         fontSize: 12,

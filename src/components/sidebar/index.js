@@ -8,7 +8,7 @@ import smallBanner from "../../img/small-banner.png"
 import { Link, useHistory, useLocation } from "react-router-dom"
 import { API, API_ROUTER } from "../../api/api"
 
-export default function Sidebar() {
+ function Sidebar() {
     const classes = useStyles()
     const history = useHistory()
     const [cards, setCards] = useState([])
@@ -140,6 +140,8 @@ export default function Sidebar() {
         </Box>
     )
 }
+
+export default React.memo(Sidebar)
 
 const TagButton = styled(Button)(props => ({
     fontWeight: "normal",

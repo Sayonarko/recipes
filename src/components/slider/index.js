@@ -7,7 +7,7 @@ import formateDate from "../helpers/formate-date"
 import { API, API_ROUTER } from "../../api/api"
 
 
-export default function Slider(props) {
+ function Slider(props) {
     const classes = useStyles()
     const [slides, setSlides] = useState([])
     const [slideIndex, setSlideIndex] = useState(1)
@@ -163,3 +163,5 @@ const useStyles = makeStyles(theme => ({
     }
 
 }))
+
+export  default React.memo(Slider)

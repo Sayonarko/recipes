@@ -26,7 +26,7 @@ function Menu() {
             display={{ xs: "none", sm: "block" }}
             height="100%"
             flexGrow="1"
-            marginLeft={{ sm: 4, md: 10 }}>
+            marginLeft={{ sm: 4, md: 10,lg: 30}}>
 
             <Box component="ul"
                 display="flex"
@@ -97,7 +97,12 @@ const MenuItem = styled(Link)((props) => ({
 
 const AddPostLink = styled(Link)({
     margin: "auto 0px auto 50px",
-    textDecoration: "none"
+    textDecoration: "none",
+
+    "@media (max-width: 991px)": {
+        margin: "auto 0px auto 30px",
+
+    }
 })
 
 

@@ -253,6 +253,7 @@ export default function AddPost() {
                         <input
                             type="file"
                             id="photo"
+                            accept="image/*"
                             required
                             style={{ opacity: 0, position: 'absolute', top: 0, left: 0 }}
                             ref={uploadInputRef}

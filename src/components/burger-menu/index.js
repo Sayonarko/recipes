@@ -1,11 +1,22 @@
-import { Typography, Button, makeStyles, styled } from "@material-ui/core"
+import { Typography, Button, makeStyles, styled, FormControl, IconButton, TextField } from "@material-ui/core"
 import React, { useState, useEffect } from "react"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useHistory } from "react-router-dom"
+import SearchIcon from '@material-ui/icons/Search';
 
 export default function BurgerMenu() {
     const location = useLocation()
-
     const classes = useStyles()
+    const history = useHistory()
+    const [value, setValue] = useState("")
+
+    function submitSearch(e) {
+        e.preventDefault()
+        if (value) {
+            history.push(`/search/${value}`)
+            setValue("")
+            setOpen(false)
+        }
+    }
     const btn = [
         {
             name: "Главная",
@@ -68,6 +79,25 @@ export default function BurgerMenu() {
                         добавить пост
                          </AddPostButton>
                 </AddPostLink>
+                <FormControl
+                className={classes.searchForm}
+            component="form"
+            onSubmit={(e) => submitSearch(e)}
+        >
+            <TextField
+            className={classes.input}
+                placeholder="Поиск..."
+                type="text"
+                InputProps={{ disableUnderline: true }}
+                value={value}
+                onChange={e => setValue(e.target.value)} />
+            <IconButton
+                color="secondary"
+                type="submit"
+            >
+                <SearchIcon />
+            </IconButton>
+        </FormControl>
                 <Typography align="center" color="secondary">©2021 Sergeevna</Typography>
             </nav>
         </div>
@@ -150,12 +180,27 @@ const useStyles = makeStyles(theme => ({
         "& + &": {
             marginTop: 20,
         }
+    },
+    searchForm: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        paddingLeft: 15,
+        marginBottom: "auto",
+        marginTop: 20,
+        
+        "& input": {
+            width: "100%",
+        }
+    },
+    input: {
+        width: "100%",
     }
 }))
 
 const AddPostLink = styled(Link)({
     maxWidth: 180,
-    margin: "4px auto auto",
+    margin: "4px auto",
     textDecoration: "none"
 })
 

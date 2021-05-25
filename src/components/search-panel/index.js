@@ -1,8 +1,7 @@
 import { Box, Typography, makeStyles, Input, Avatar, Divider, Button, Collapse, TextField, FormControl, IconButton } from "@material-ui/core"
 import React, { useEffect, useState, useRef } from "react"
-
 import { Link, useHistory, useLocation } from "react-router-dom"
-import SearchIcon from '@material-ui/icons/Search';
+import SearchIcon from '@material-ui/icons/Search'
 
 export default function SearchPanel() {
     const classes = useStyles()
@@ -37,7 +36,6 @@ export default function SearchPanel() {
             onFocus={() => setExpanded(true)}
             onBlur={() => setExpanded(false)}
         >
-            {/* <Collapse in={expanded} timeout={300} collapsedHeight={0} > */}
             <TextField
                 inputProps={{
                     style: {
@@ -53,7 +51,6 @@ export default function SearchPanel() {
                 InputProps={{ disableUnderline: true }}
                 value={value}
                 onChange={e => setValue(e.target.value)} />
-            {/* </Collapse> */}
             <IconButton
                 color="secondary"
                 type="submit"

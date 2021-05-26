@@ -1,4 +1,4 @@
-import { Typography, Button, makeStyles, styled, FormControl, IconButton, TextField } from "@material-ui/core"
+import { Typography, Button, makeStyles, styled, FormControl, IconButton, TextField, InputAdornment, Input } from "@material-ui/core"
 import React, { useState, useEffect } from "react"
 import { Link, useLocation, useHistory } from "react-router-dom"
 import SearchIcon from '@material-ui/icons/Search';
@@ -84,19 +84,24 @@ export default function BurgerMenu() {
             component="form"
             onSubmit={(e) => submitSearch(e)}
         >
-            <TextField
+            <Input
             className={classes.input}
                 placeholder="Поиск..."
                 type="text"
-                InputProps={{ disableUnderline: true }}
+                disableUnderline
                 value={value}
-                onChange={e => setValue(e.target.value)} />
-            <IconButton
-                color="secondary"
-                type="submit"
-            >
-                <SearchIcon />
-            </IconButton>
+                onChange={e => setValue(e.target.value)}
+                endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        color="secondary"
+                        type="submit">
+                          <SearchIcon />
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                   />
         </FormControl>
                 <Typography align="center" color="secondary">©2021 Sergeevna</Typography>
             </nav>
@@ -186,6 +191,7 @@ const useStyles = makeStyles(theme => ({
         flexDirection: "row",
         alignItems: "center",
         paddingLeft: 15,
+        paddingRight: 15,
         marginBottom: "auto",
         marginTop: 20,
         
@@ -195,6 +201,12 @@ const useStyles = makeStyles(theme => ({
     },
     input: {
         width: "100%",
+        maxWidth: 290,
+        margin: "0 auto",
+
+        "& .MuiIconButton-root": {
+            padding: 5
+        }
     }
 }))
 

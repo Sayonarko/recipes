@@ -12,6 +12,8 @@ export default function SearchResult(props) {
     const [cards, setCards] = useState([])
     const [requestSucess, setRequestSucess] = useState(false)
     const location = useLocation()
+
+    console.log(props)
     useEffect(() => {
         window.scrollTo(0, 0)
 
@@ -70,8 +72,8 @@ export default function SearchResult(props) {
                 pb={10}>
                 <Box mb={{ xs: "20px", sm: "30px" }}>
                     {requestSucess && !cards.length
-                        ? <Typography variant="h1">По Вашему запросу <Typography variant="h1" component="span" style={{ color: "#03afcf" }}>{props.match.params.searchRequest}</Typography> ничего не найдено</Typography>
-                        : <Typography variant="h1">Результат поиска по запросу: <Typography variant="h1" component="span" style={{ color: "#03afcf" }}>{props.match.params.searchRequest}</Typography></Typography>}
+                        ? <Typography variant="h1">По Вашему запросу <Typography variant="h1" component="span" style={{ color: "#e49253" }}>{props.match.params.searchRequest}</Typography> ничего не найдено</Typography>
+                        : <Typography variant="h1">Результат поиска по запросу: <Typography variant="h1" component="span" style={{ color: "#e49253" }}>{props.match.params.searchRequest}</Typography></Typography>}
                 </Box>
                 {requestSucess ? <RenderSearchResult /> : <CircularProgress />}
             </Container>

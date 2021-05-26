@@ -13,7 +13,6 @@ export default function SearchResult(props) {
     const [requestSucess, setRequestSucess] = useState(false)
     const location = useLocation()
 
-    console.log(props)
     useEffect(() => {
         window.scrollTo(0, 0)
 

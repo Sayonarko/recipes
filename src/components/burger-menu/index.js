@@ -1,4 +1,4 @@
-import { Typography, Button, makeStyles, styled, FormControl, IconButton, TextField, InputAdornment, Input } from "@material-ui/core"
+import { Typography, Button, makeStyles, styled, FormControl, IconButton, InputAdornment, Input } from "@material-ui/core"
 import React, { useState, useEffect } from "react"
 import { Link, useLocation, useHistory } from "react-router-dom"
 import SearchIcon from '@material-ui/icons/Search';
@@ -206,7 +206,13 @@ const useStyles = makeStyles(theme => ({
 
         "& .MuiIconButton-root": {
             padding: 5
-        }
+        }, 
+
+        "&:focus-within": {
+            "& .MuiSvgIcon-root": {
+                fill: theme.palette.warning.main,
+            }
+        },
     }
 }))
 

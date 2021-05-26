@@ -1,6 +1,6 @@
-import { Box, Typography, makeStyles, Input, Avatar, Divider, Button, Collapse, TextField, FormControl, IconButton } from "@material-ui/core"
+import {  makeStyles, TextField, FormControl, IconButton } from "@material-ui/core"
 import React, { useEffect, useState, useRef } from "react"
-import { Link, useHistory, useLocation } from "react-router-dom"
+import {  useHistory } from "react-router-dom"
 import SearchIcon from '@material-ui/icons/Search'
 
 export default function SearchPanel() {

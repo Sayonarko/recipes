@@ -81,7 +81,7 @@ const MenuItem = styled(Link)((props) => ({
     "&:after": {
         position: "absolute",
         left: "50%",
-        bottom: 0,
+        bottom: 20,
         backgroundColor: props.theme.palette.info.main,
         display: "block",
         content: '""',

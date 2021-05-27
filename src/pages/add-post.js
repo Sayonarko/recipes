@@ -3,16 +3,12 @@ import Alert from '@material-ui/lab/Alert';
 import React, { useState, useEffect, useRef } from "react"
 import Container from "../components/UI/container"
 import { API, API_ROUTER } from "../api/api"
+import RichTextEditor from "react-rte";
 
 export default function AddPost() {
     const classes = useStyles()
     const [requestPending, setRequestPending] = useState(false)
     const [requestSucess, setRequestSucess] = useState(false)
-    const [requestError, setRequestError] = useState({
-        error: false,
-        message: "Что-то пошло не так... Попробуйте позже"
-    })
-
     const uploadInputRef = useRef()
     const [value, setValue] = useState({
         img: "",
@@ -23,11 +19,56 @@ export default function AddPost() {
         steps: [],
         tags: []
     })
+    const [requestError, setRequestError] = useState({
+        error: false,
+        message: "Что-то пошло не так... Попробуйте позже"
+    })
+    const [editorValue, setEditorValue] = useState(
+        RichTextEditor.createValueFromString("", "html")
+    );
+    const toolbarConfig = {
+        display: [
+            "INLINE_STYLE_BUTTONS",
+            "BLOCK_TYPE_BUTTONS",
+            "LINK_BUTTONS",
+            "BLOCK_TYPE_DROPDOWN",
+            "HISTORY_BUTTONS",
+            "ALIGNMENTS_BUTTONS"
+        ],
+        INLINE_STYLE_BUTTONS: [
+            { label: "Bold", style: "BOLD", className: "custom-css-class" },
+            { label: "Italic", style: "ITALIC" },
+            { label: "Underline", style: "UNDERLINE" }
+        ],
+        BLOCK_TYPE_DROPDOWN: [
+            { label: "Normal", style: "unstyled" },
+            { label: "Heading Medium", style: "header-two" },
+            { label: "Heading Small", style: "header-three" }
+        ],
+        BLOCK_TYPE_BUTTONS: [
+            { label: "UL", style: "unordered-list-item" },
+            { label: "OL", style: "ordered-list-item" }
+        ]
+    };
+
+    console.log(value.desc)
 
     useEffect(() => {
         window.scrollTo(0, 0)
 
     }, [])
+
+    useEffect(() => {
+        setValue({
+            ...value,
+            desc: editorValue.toString("html")
+        })
+
+    }, [editorValue])
+
+    function onChange(value) {
+        setEditorValue(value)
+    }
 
 
     function encodeImage() {
@@ -129,10 +170,10 @@ export default function AddPost() {
                     anchorOrigin={{ vertical: "top", horizontal: "center" }}
                     autoHideDuration={5000} >
                     <Alert
-                    onClose={() => setRequestError({
-                        ...requestError,
-                        error: false
-                    })}
+                        onClose={() => setRequestError({
+                            ...requestError,
+                            error: false
+                        })}
                         elevation={6}
                         variant="filled"
                         severity="error">
@@ -172,7 +213,7 @@ export default function AddPost() {
                         htmlFor="desc">
                         Описание
                             </Typography>
-                    <TextField
+                    {/* <TextField
                         id="desc"
                         multiline
                         rows="5"
@@ -184,7 +225,11 @@ export default function AddPost() {
                         onChange={e => setValue({
                             ...value,
                             desc: e.target.value
-                        })} />
+                        })} /> */}
+                    <RichTextEditor
+                     onChange={onChange}
+                      value={editorValue}
+                       toolbarConfig={toolbarConfig} />
                     <Typography
                         variant="h2"
                         component="label"
@@ -294,6 +339,32 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.down("xs")]: {
             width: "100%"
         },
+
+        "& .RichTextEditor__root___2QXK-": {
+            marginTop: 10,
+            marginBottom: 20,
+            minHeight: 150,
+            border: `2px solid ${theme.palette.secondary.main}`,
+            borderRadius: 4,
+            fontFamily: theme.typography.fontFamily,
+            fontSize: 16,
+            display: "flex",
+            flexDirection: "column-reverse",
+
+            [theme.breakpoints.down("xs")]: {
+                marginTop: 5,
+                marginBottom: 10,
+                fontSize: 14,
+            },
+        }, 
+
+        "& .EditorToolbar__root___3_Aqz": {
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            borderBottom: "none",
+            borderTop: `1px solid ${theme.palette.secondary.main}`,
+        }
     },
     input: {
         marginTop: 10,

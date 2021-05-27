@@ -1,5 +1,5 @@
 import { Box, Typography, Grid, Fade, CardMedia, makeStyles, Avatar, Divider, List, ListItem, Hidden } from "@material-ui/core"
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import Container from "../components/UI/container"
 import PostComments from "../components/post-comments"
 import Sidebar from "../components/sidebar"
@@ -16,6 +16,7 @@ export default function PostPage(props) {
     const [requestSucess, setRequestSucess] = useState(false)
     const { views, title, date, img, desc, tags, author, ingredients, steps } = card
     const history = useHistory()
+    const descRef = useRef()
     //data
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -25,12 +26,15 @@ export default function PostPage(props) {
                         if (result.data) {
                             setCard(result.data)
                             setRequestSucess(true)
+                            descRef.current.innerHTML = result.data.desc
                         } else {
                             history.push("/page-not-found")
                         }
             })
             .catch(error => console.log(error))
     }, [props.match.params.id])
+
+
     //views page count
     useEffect(() => {
         setTimeout(() => {
@@ -115,7 +119,8 @@ export default function PostPage(props) {
                         {/* main  */}
 
                         <Typography variant="h1" gutterBottom>{title}</Typography>
-                        <Typography className={classes.desc} variant="body1">{desc}</Typography>
+                        <div className={classes.desc} ref={descRef}></div>
+                        {/* <Typography className={classes.desc} variant="body1">{desc}</Typography> */}
                         {(ingredients && ingredients.length) 
                            ?  <Box>
                                 <Typography variant="h2">Ингредиенты</Typography>
@@ -244,7 +249,7 @@ export default function PostPage(props) {
 
 const useStyles = makeStyles(theme => ({
     root: {
-        "& .MuiTypography-h2,.MuiTypography-body1, .MuiList-root": {
+        "& h2, p, ul": {
             marginBottom: 24,
 
             [theme.breakpoints.down("sm")]: {
@@ -253,6 +258,33 @@ const useStyles = makeStyles(theme => ({
     
             [theme.breakpoints.down("xs")]: {
                 marginBottom: 10,
+            }
+        },
+        "& li": {
+            position: "relative",
+            listStyle: "none",
+
+            "& + li": {
+                marginTop: 10
+            },
+
+            "&:before": {
+                position: "absolute",
+                content: "''",
+                top: "calc(50% - 4px)",
+                left: -12,
+                backgroundColor: theme.palette.info.main,
+                width: 7,
+                height: 7,
+                borderRadius: "50%",
+    
+                [theme.breakpoints.down("xs")]: {
+                    width: 5,
+                    height: 5,
+                    left: -10,
+                    top: "calc(50% - 2px)",
+    
+                }
             }
         }
     },
@@ -297,28 +329,14 @@ const useStyles = makeStyles(theme => ({
         marginRight: 5
     },
     desc: {
-        textIndent: "1.5em",
-    },
-    listItem: {
-        position: "relative",
-
-        "&:before": {
-            position: "absolute",
-            content: "''",
-            top: "calc(50% - 4px)",
-            left: -12,
-            backgroundColor: theme.palette.info.main,
-            width: 7,
-            height: 7,
-            borderRadius: "50%",
+        "& p": {
+            lineHeight: "22px",
 
             [theme.breakpoints.down("xs")]: {
-                width: 5,
-                height: 5,
-                left: -10,
-                top: "calc(50% - 2px)",
+                lineHeight: "18px",
 
             }
+
         }
     },
     tagLink: {

@@ -11,11 +11,11 @@ import { API, API_ROUTER } from "../api/api"
 export default function Homepage() {
     const [cards, setCards] = useState([])
     const [requestSucess, setRequestSucess] = useState(false)
-    const [moreCards, setMoreCards] = useState(10)
+    const [moreCards, setMoreCards] = useState(12)
 
     useEffect(() => {
         const params = {
-            limit: 10,
+            limit: 12,
             sort: "date"
         }
         API({...API_ROUTER.getPosts, params})
@@ -44,7 +44,7 @@ export default function Homepage() {
                         style={{ display: cards.length <= moreCards ? "none" : "block" }}>
                         <Button
                             size="large"
-                            onClick={() => setMoreCards(prev => prev + 10)} >
+                            onClick={() => setMoreCards(prev => prev + 12)} >
                             показать больше
                         </Button>
                     </Box>

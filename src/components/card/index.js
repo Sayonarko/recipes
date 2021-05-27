@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, CardContent, CardMedia, Card, Grid, Box, Fade } from '@material-ui/core';
 import formateDate from "../helpers/formate-date";
@@ -11,6 +11,7 @@ export default function RecipesCard({ views, title, date, img, desc, tags, _id, 
     const [isRaised, setIsRaised] = useState(false)
     const [windowWidth, setWindowWith] = useState(0)
     const [fullWidth, setFullWidth] = useState(4)
+    const descRef = useRef()
 
     useLayoutEffect(() => {
         function updateSize() {
@@ -28,6 +29,10 @@ export default function RecipesCard({ views, title, date, img, desc, tags, _id, 
             windowWidth < 1200 ? setFullWidth(3) : setFullWidth(4)
         }
     }, [windowWidth, small])
+
+    useEffect(() => {
+        descRef.current.innerHTML = desc
+    }, [desc])
 
     return (
         <Fade in={_id ? true : false}>
@@ -84,8 +89,8 @@ export default function RecipesCard({ views, title, date, img, desc, tags, _id, 
                             </Box>
                             {tags[0]}
                         </Typography>
-
-                        <Typography variant="body2" className={classes.text}>{desc}</Typography>
+                        <div ref={descRef} className={classes.text}></div>
+                        {/* <Typography variant="body2" className={classes.text}>{desc}</Typography> */}
                     </CardContent>
                 </Card>
             </Grid >
@@ -128,7 +133,7 @@ const useStyles = makeStyles((theme) => ({
     },
     text: {
         overflow: "hidden",
-        maxHeight: 120,
+        maxHeight: 125,
         maxWidth: 365,
         margin: "0 auto",
         textAlign: "center",

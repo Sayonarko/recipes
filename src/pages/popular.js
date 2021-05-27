@@ -9,7 +9,7 @@ import { API, API_ROUTER } from "../api/api"
 export default function TopPage() {
     const [cards, setCards] = useState([])
     const [requestSucess, setRequestSucess] = useState(false)
-    const [moreCards, setMoreCards] = useState(10)
+    const [moreCards, setMoreCards] = useState(12)
 
 
     useEffect(() => {
@@ -41,10 +41,10 @@ export default function TopPage() {
                     <Box
                         mt={{ xs: 5, sm: 10 }}
                         textAlign="center"
-                        style={{ display: cards.length <= moreCards ? "none" : "block" }}>
+                        >
                         <Button
                             size="large"
-                            onClick={() => setMoreCards(prev => prev + 10)} >
+                            onClick={() => setMoreCards(prev => prev + 12)} >
                             показать больше
                         </Button>
                     </Box>

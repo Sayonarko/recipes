@@ -26,33 +26,25 @@ export default function TopPage() {
             .catch(err => console.log(err))
     }, [moreCards])
 
-    function RenderHomepage() {
+    function RenderPopularPage() {
 
         return (
-
-
-            <Grid container spacing={6}>
-                <Grid item xs={12} md={8} lg={9}>
-                    <Grid container spacing={6}>
-                        {
-                            cards.map((item, id) => id < moreCards && <RecipesCard {...item} id={id} key={item._id} />)
-                        }
-                    </Grid>
-                    <Box
-                        mt={{ xs: 5, sm: 10 }}
-                        textAlign="center"
-                        >
-                        <Button
-                            size="large"
-                            onClick={() => setMoreCards(prev => prev + 12)} >
-                            показать больше
-                        </Button>
-                    </Box>
+            <>
+                <Grid container spacing={6}>
+                    {
+                        cards.map((item, id) => id < moreCards && <RecipesCard {...item} id={id} key={item._id} />)
+                    }
                 </Grid>
-                <Grid item xs={12} md={4} lg={3}>
-                    <Sidebar data={cards} />
-                </Grid>
-            </Grid>
+                <Box
+                    mt={{ xs: 5, sm: 10 }}
+                    textAlign="center">
+                    <Button
+                        size="large"
+                        onClick={() => setMoreCards(prev => prev + 12)} >
+                        показать больше
+                    </Button>
+                </Box>
+            </>
         )
     }
     return (
@@ -65,7 +57,14 @@ export default function TopPage() {
                 pt={{ xs: 5, sm: 10 }}
                 pb={{ xs: 5, sm: 10 }}>
                 <Typography variant="h1" align="left" gutterBottom>Популярное на Recipes</Typography>
-                {requestSucess ? <RenderHomepage /> : <CircularProgress />}
+                <Grid container spacing={6}>
+                    <Grid item xs={12} md={8} lg={9}>
+                        {requestSucess ? <RenderPopularPage /> : <CircularProgress />}
+                    </Grid>
+                    <Grid item xs={12} md={4} lg={3}>
+                        <Sidebar />
+                    </Grid>
+                </Grid>
             </Container>
         </Box>
     )

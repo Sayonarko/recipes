@@ -18,7 +18,7 @@ export default function Homepage() {
             limit: 12,
             sort: "date"
         }
-        API({...API_ROUTER.getPosts, params})
+        API({ ...API_ROUTER.getPosts, params })
             .then(res => {
                 setCards(res.data)
                 setRequestSucess(true)
@@ -29,30 +29,23 @@ export default function Homepage() {
     function RenderHomepage() {
 
         return (
-
-
-            <Grid container spacing={6}>
-                <Grid item xs={12} md={8} lg={9}>
-                    <Grid container spacing={6}>
-                        {
-                            cards.map((item, id) => id < moreCards && <RecipesCard {...item} id={id} key={item._id} />)
-                        }
-                    </Grid>
-                    <Box
-                        mt={{ xs: 5, sm: 6, md: 10 }}
-                        textAlign="center"
-                        style={{ display: cards.length <= moreCards ? "none" : "block" }}>
-                        <Button
-                            size="large"
-                            onClick={() => setMoreCards(prev => prev + 12)} >
-                            показать больше
-                        </Button>
-                    </Box>
+            <>
+                <Grid container spacing={6}>
+                    {
+                        cards.map((item, id) => id < moreCards && <RecipesCard {...item} id={id} key={item._id} />)
+                    }
                 </Grid>
-                <Grid item xs={12} md={4} lg={3}>
-                    <Sidebar />
-                </Grid>
-            </Grid>
+                <Box
+                    mt={{ xs: 5, sm: 6, md: 10 }}
+                    textAlign="center"
+                    style={{ display: cards.length <= moreCards ? "none" : "block" }}>
+                    <Button
+                        size="large"
+                        onClick={() => setMoreCards(prev => prev + 12)} >
+                        показать больше
+                </Button>
+                </Box>
+            </>
         )
     }
 
@@ -66,7 +59,14 @@ export default function Homepage() {
                 minHeight="400px"
                 pt={{ xs: 5, sm: 10 }}
                 pb={{ xs: 5, sm: 10 }}>
-                {requestSucess ? <RenderHomepage /> : <CircularProgress />}
+                <Grid container spacing={6}>
+                    <Grid item xs={12} md={8} lg={9}>
+                        {requestSucess ? <RenderHomepage /> : <CircularProgress />}
+                    </Grid>
+                    <Grid item xs={12} md={4} lg={3}>
+                        <Sidebar />
+                    </Grid>
+                </Grid>
             </Container>
         </Box>
     )

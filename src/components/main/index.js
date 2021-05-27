@@ -8,6 +8,8 @@ import NotFoundPage from "../../pages/not-found";
 import PostPage from "../../pages/post-page";
 import SearchResult from "../../pages/search-result";
 import AddPost from "../../pages/add-post";
+import RegistrationPage from "../../pages/registration";
+
 
 export default function Main() {
 
@@ -15,6 +17,7 @@ export default function Main() {
         <Box component="main">
             <Switch>
                 <Route path='/' exact component={Homepage} />
+                <Route path='/registration' exact component={RegistrationPage} />
                 <Route path='/popular' exact component={TopPage} />
                 <Route path='/about' exact component={AboutPage} />
                 <Route path='/add-new-post' exact component={AddPost} />

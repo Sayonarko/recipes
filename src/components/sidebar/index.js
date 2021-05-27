@@ -8,10 +8,11 @@ import smallBanner from "../../img/small-banner.png"
 import { Link, useHistory, useLocation } from "react-router-dom"
 import { API, API_ROUTER } from "../../api/api"
 
- function Sidebar() {
+function Sidebar() {
     const classes = useStyles()
     const history = useHistory()
-    const [cards, setCards] = useState([])
+    const [popularCards, setPopularCards] = useState([])
+    const [newCards, setNewCards] = useState([])
     const [requestSucess, setRequestSucess] = useState(false)
     const location = useLocation()
     console.log();
@@ -29,18 +30,37 @@ import { API, API_ROUTER } from "../../api/api"
     }
 
     useEffect(() => {
-
-        const params = {
-            limit: 3,
-            sort: "likes"
-        }
-        API({ ...API_ROUTER.getPosts, params })
-            .then(res => {
-                setCards(res.data)
-                setRequestSucess(true)
+        async function fetchData() {
+            await API({
+                ...API_ROUTER.getPosts, params: {
+                    limit: 3,
+                    sort: "views"
+                }
             })
-            .catch(err => console.log(err))
-    }, []);
+                .then(res => {
+                    setPopularCards(res.data)
+                })
+                .catch(err => console.log(err))
+
+            await API({
+                ...API_ROUTER.getPosts, params: {
+                    limit: 3,
+                    sort: "date"
+                }
+            })
+                .then(res => {
+                    setNewCards(res.data)
+                })
+                .catch(err => console.log(err))
+        }
+        fetchData()
+            .then(() => {
+                if (popularCards.length && newCards.length) {
+                    setRequestSucess(true)
+                }
+            })
+
+    }, [newCards.length, popularCards.length]);
 
 
     function CollapseTags(props) {
@@ -74,7 +94,7 @@ import { API, API_ROUTER } from "../../api/api"
                         image={bigBanner}
                         className={classes.bigBanner}
                         title="banner" />
-                    <Box p={6} >
+                    <Box m="30px 30px 0" >
 
                         <Typography
                             className={classes.title}
@@ -101,11 +121,27 @@ import { API, API_ROUTER } from "../../api/api"
 
                 </Grid>
                 <Grid item xs={12} sm={6} md={12}>
-                    <Box p={6} >
-
-                        <Typography className={classes.title} variant="h2" gutterBottom>Лучшие посты</Typography>
+                    <Box m="30px 30px 0" >
+                        <Typography className={classes.title} variant="h2" gutterBottom>Недавние посты</Typography>
                         <Divider className={classes.titleDivider} />
-                        {cards.map(item => {
+                        {newCards.map(item => {
+                            return (
+                                <Box
+                                    className={classes.post}
+                                    component={Link}
+                                    to={`/post/${item._id}`}
+                                    key={item._id}>
+                                    <Avatar className={classes.postImg} alt={item.title} src={item.img} variant="rounded" />
+                                    <Typography className={classes.postTitle} color="textPrimary" >{item.title}</Typography>
+                                    <Typography className={classes.postDate} variant="button" color="secondary">{formateDate(item.date, "short")}</Typography>
+                                </Box>
+                            )
+                        })}
+                    </Box >
+                    <Box m={6} >
+                        <Typography className={classes.title} variant="h2" gutterBottom>Популярные посты</Typography>
+                        <Divider className={classes.titleDivider} />
+                        {popularCards.map(item => {
                             return (
                                 <Box
                                     className={classes.post}
@@ -196,7 +232,9 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: "100%"
     },
     title: {
-        letterSpacing: 1.15,
+        textTransform: "uppercase",
+        fontSize: 16,
+        letterSpacing: "0.1em",
         "&:not(:first-child)": {
             marginTop: 30
         }
